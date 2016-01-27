@@ -9,9 +9,6 @@
 <script> 
 
 
-
-
-
 Function.prototype.method = function (name, func) {
 	this.prototype[name] = func; 
 	return this; 
@@ -21,8 +18,14 @@ Number.method('integer', function()  {
 	return Math[this < 0 ? 'ceiling' : 'floor'](this); 
 }); 
 
-document.writeln((-10 / 3).integer()); 
 
+console.log((-10 / 3).integer()); 
+
+
+//proof the statements in square brackets work 
+var lie = 0; 
+myObject = {}; 
+myObject[lie < 0 ? 'false' : 'floor'] = 1; 
 
 
 
