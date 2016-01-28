@@ -18,21 +18,18 @@ Function.prototype.method = function (name, func) {
 // ----------------------------------------------
 
 var hanoi = function (disc, src, aux, dst) {
+	if (disc > 0) { 
 
-	
-
-	//will only fire if there is a disc 
-	if (disc > 0) {
-		// console.log(disc + '-----------------'); 
 		hanoi(disc - 1, src, dst, aux); 
 		console.log('Move disc ' + disc + ' from ' + src + ' to ' + dst); 
-		hanoi(disc - 1, src, dst, aux); 
-	} 
+		hanoi(disc - 1, aux, src, dst); 
+	}  
 
-	console.log(disc + '-----------------'); 
-}
+}  
 
 hanoi(3, 'Source', 'Auxilliary', 'Destination'); 
+
+// RESOLVED 
 
 
 
