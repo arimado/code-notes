@@ -1,0 +1,41 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+<script> 
+
+// LIBRARY --------------------------------------
+
+Function.prototype.method = function (name, func) {
+	this.prototype[name] = func; 
+	return this; 
+};
+
+// ----------------------------------------------
+
+var hanoi = function (disc, src, aux, dst) {
+
+	
+
+	//will only fire if there is a disc 
+	if (disc > 0) {
+		// console.log(disc + '-----------------'); 
+		hanoi(disc - 1, src, dst, aux); 
+		console.log('Move disc ' + disc + ' from ' + src + ' to ' + dst); 
+		hanoi(disc - 1, src, dst, aux); 
+	} 
+
+	console.log(disc + '-----------------'); 
+}
+
+hanoi(3, 'Source', 'Auxilliary', 'Destination'); 
+
+
+
+</script> 
+</body>
+</html>
