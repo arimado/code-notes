@@ -30,6 +30,35 @@ var myObject = function () {
 	}
 }(); 
 
+// -------------------------------------------
+
+var quo = function (status) {
+	return {
+		get_status: function () {
+			return status; 
+		}
+	}
+} 
+
+//make myQuo equal to the return value of quo with a paramter 
+	//which is an object with a method 
+		//this object has access to the parameter passed to the function but
+var myQuo = quo('TO: INNER FUNCTIONS - WITNESS ME!!!!!'); 
+
+//this is the same as the myObject function above except 
+// 1. the private variable is now the parameter 
+// 2. you do not invoke it on declration, it is invoked when assigned to a variable.
+
+//myQuo is an object with a single method 
+
+//questions
+
+//if quo is a function 
+//and myQuo is an object 
+// why does myQuo have access to the function value of status 
+
+console.log(myQuo.get_status()); 
+
 
 
 
