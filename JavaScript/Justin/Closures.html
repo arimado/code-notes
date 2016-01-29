@@ -1,0 +1,95 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="
+https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+</head>
+
+<body> 
+
+<button id="countSelf">
+CountSelf
+</button>
+<div id="statusSelf">
+click countSelf to start
+</div>
+
+
+<script> 
+//self invoking
+var counter = (function () {
+	var count = 0;
+
+	var func = function () {
+		//adds 1 to count variable above
+		count+= 1;
+		//func now = count
+		return count;
+	};
+	//return function 
+	return func;
+}()); 
+
+// counter is the return value of the anonymous function
+	// func
+//func has access to count because it has access to the context in which it was invoked.
+//you would make a closure because sometimes you dont want certain thing accessible
+// i think lol
+
+$( "#countSelf" ).click(function() {
+	$( "#statusSelf" ).text(counter());
+});
+
+</script> 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

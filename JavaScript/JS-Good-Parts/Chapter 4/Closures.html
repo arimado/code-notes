@@ -5,7 +5,8 @@
   <meta charset="utf-8">
 </head>
 
-<body>
+<body> 
+
 <script> 
 
 // LIBRARY --------------------------------------
@@ -58,12 +59,94 @@ var myQuo = quo('TO: INNER FUNCTIONS - WITNESS ME!!!!!');
 // why does myQuo have access to the function value of status 
 
 console.log(myQuo.get_status()); 
+console.log('--------------------------------'); 
 
+// -------------------------------------------
 
+var fade = function (node) {
+	var level = 1; 
+	var step = function () {
+		var hex = level.toString(16);
+		node.style.backgroundColor = '#FFFF' + hex + hex; 
+		console.log('#FFFF' + hex + hex); 
 
+		if(level < 15) {
+			// this makes it a closure.
+			// step has access to the level; 
+			level += 1; 
+			setTimeout(step, 50);
+		} 
+	}
+	step(); 
+};
+
+fade(document.body);  
+
+//Questions 
+
+// why is: 
+// 1. var step = function() {}(); 
+// different from: 
+// 2. step(); 
+
+// probably because 1 is getting a value assigned to step 
+// while 2 is running the program?  
+// yeah something like you'll have to confirm 
+
+// but you get the program though.
+
+// but why is it a closure? 
 
 
 
 </script> 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
