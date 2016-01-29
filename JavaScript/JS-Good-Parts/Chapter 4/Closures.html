@@ -17,19 +17,19 @@ Function.prototype.method = function (name, func) {
 
 // ----------------------------------------------
 
-var hanoi = function (disc, src, aux, dst) {
-	if (disc > 0) { 
+var myObject = function () {
+	var value = 0; 
 
-		hanoi(disc - 1, src, dst, aux); 
-		console.log('Move disc ' + disc + ' from ' + src + ' to ' + dst); 
-		hanoi(disc - 1, aux, src, dst); 
-	}  
-	
-}  
+	return {
+		increment: function (inc) {
+			value += typeof inc === 'number' ? inc : 1;  
+		}, 
+		getValue: function  () {
+			return value; 
+		}
+	}
+}(); 
 
-hanoi(3, 'Source', 'Auxilliary', 'Destination'); 
-
-// RESOLVED 
 
 
 
