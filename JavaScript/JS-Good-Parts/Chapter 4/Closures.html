@@ -68,7 +68,7 @@ var fade = function (node) {
 	var step = function() {
 		var hex = level.toString(16);
 		node.style.backgroundColor = '#FFFF' + hex + hex; 
-		console.log('#FFFF' + hex + hex); 
+		// console.log('#FFFF' + hex + hex); 
 
 		if(level < 15) {
 			// this makes it a closure.
@@ -103,6 +103,10 @@ fade(document.body);
 // it didnt work.
 // this is because when step was called in line 77, it was calling a value rather than a function
 // if you would like to remove step(); you will have to make fade a 'Method Function Expression' (IF YA REMEMBER WHAT THAT IS BRAH!)
+
+
+// -------------------------------------------
+
 
 </script> 
 </body>
