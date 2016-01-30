@@ -20,6 +20,18 @@ click countSelf to start
 <br/>
 <br/>
 
+<button id="countReg">
+CountReg
+</button>
+
+<div id="statusReg">
+click countReg to start
+</div>
+
+<br/>
+<br/>
+<br/>
+
 <button id="countJA">
 CountJA
 </button>
@@ -43,35 +55,63 @@ var counter = (function () {
 	return func;
 }()); 
 
+$( "#countSelf" ).click(function() {
+	$( "#statusSelf" ).text(counter());
+});
+
 // counter is the return value of the anonymous function
 	// func
 //func has access to count because it has access to the context in which it was invoked.
 //you would make a closure because sometimes you dont want certain thing accessible
 // i think lol
 
-$( "#countSelf" ).click(function() {
-	$( "#statusSelf" ).text(counter());
+
+//regular -----------------------------
+
+
+var counterReg = function () {
+  var count = 0;
+  var func = function () {
+    count+= 1;
+    return count;
+  };
+  return func;
+};  
+
+$( "#countReg" ).click(function() {
+	$( "#statusReg" ).text(counterReg());
 });
+
+// differences from function above 
+// - counter is not assigned a self-invoked anonymous function 
+// - 
+
+
+
+//SELF  -----------------------------
+
+var funcCount = function(count) {
+	count+= 1;
+    return count;
+};  
 
 
 //regular 
 var counterJA = function (func) {
   var count = 0;
-  
+  func(count);
   //return 
-  return funcJA;
-};
+  return func();
+}; 
 
 
-var funcJA = function(count) {
-	count+= 1;
-    return count;
-}
+
 
 $( "#countJA" ).click(function() {
-	$( "#statusJA" ).text(counterJA());
+	$( "#statusJA" ).text(counterJA(funcCount));
 }); 
 
+//this works when function is self invoked 
 
 </script> 
 </body>
