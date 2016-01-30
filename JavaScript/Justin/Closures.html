@@ -16,6 +16,17 @@ CountSelf
 click countSelf to start
 </div>
 
+<br/>
+<br/>
+<br/>
+
+<button id="countJA">
+CountJA
+</button>
+
+<div id="statusJA">
+click countJA to start
+</div>
 
 <script> 
 //self invoking
@@ -41,6 +52,26 @@ var counter = (function () {
 $( "#countSelf" ).click(function() {
 	$( "#statusSelf" ).text(counter());
 });
+
+
+//regular 
+var counterJA = function (func) {
+  var count = 0;
+  
+  //return 
+  return funcJA;
+};
+
+
+var funcJA = function(count) {
+	count+= 1;
+    return count;
+}
+
+$( "#countJA" ).click(function() {
+	$( "#statusJA" ).text(counterJA());
+}); 
+
 
 </script> 
 </body>

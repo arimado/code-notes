@@ -6,6 +6,14 @@
 </head>
 
 <body>
+
+	<div class="sick"> </div>
+	<div class="sick"> </div>
+	<div class="sick"> </div>
+	<div class="sick"> </div>
+	<div class="sick"> </div>
+
+
 <script> 
 
 // LIBRARY --------------------------------------
@@ -19,17 +27,52 @@ Function.prototype.method = function (name, func) {
 
 var hanoi = function (disc, src, aux, dst) {
 	if (disc > 0) { 
-
 		hanoi(disc - 1, src, dst, aux); 
 		console.log('Move disc ' + disc + ' from ' + src + ' to ' + dst); 
 		hanoi(disc - 1, aux, src, dst); 
 	}  
-	
 }  
 
 hanoi(3, 'Source', 'Auxilliary', 'Destination'); 
 
-// RESOLVED 
+// RESOLVED  
+
+// ---------------------------------------------  
+
+var walk_the_DOM = function walk(node, func) {
+	func(node); 
+	node = node.firstChild;
+	while (node) {
+		walk(node, func);
+		node = node.nextSibling;
+	}
+};
+
+var getElementsByAttribute = function (att, value) {
+	var results = [];  
+	walk_the_DOM(document.body, function (node) {
+		var actual = node.nodeType === 1 && node.getAttribute(att); 
+
+		//above is the same as this 
+
+		// var actual;
+		// if(node.nodeType === 1) {
+		// 	actual = node.getAttribute(att); 
+		// } else {
+		// 	actual = false; 
+		// }
+
+		if(typeof actual === 'string' && (actual === value || typeof value !== 'string')) {
+			results.push(node); 
+		} 
+
+	}); 
+
+	return results; 
+};
+
+
+console.log(getElementsByAttribute('class', 'sick')); 
 
 
 
