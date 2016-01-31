@@ -1,0 +1,99 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body> 
+
+<script> 
+
+// LIBRARY --------------------------------------
+
+Function.prototype.method = function (name, func) {
+	this.prototype[name] = func; 
+	return this; 
+};
+
+// ----------------------------------------------
+
+String.method('deentityify', function () {
+	
+	var entity = {
+		quot: '"',
+		lt: '<',
+		gt: '>' 
+	}; 
+
+	return function () {
+		return this.replace(/&([^&;]+);/g, 
+			function (a, b) {
+				var r = entity[b]; 
+				return typeof r === 'string' ? r : a; 
+			}
+		); 
+	} 
+}()); 
+
+document.writeln( '&lt;&quot;&gt;'.deentityify())
+
+// I understand the concept of the module hiding the entity object 
+// I just dont understand the replace function 
+// and i dont think I need to   
+
+
+// -------------------------------------------
+
+
+</script> 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
