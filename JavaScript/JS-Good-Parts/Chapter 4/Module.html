@@ -17,6 +17,7 @@ Function.prototype.method = function (name, func) {
 };
 
 // ----------------------------------------------
+// deentityify
 
 String.method('deentityify', function () {
 	
@@ -40,10 +41,40 @@ document.writeln( '&lt;&quot;&gt;'.deentityify())
 
 // I understand the concept of the module hiding the entity object 
 // I just dont understand the replace function 
-// and i dont think I need to   
-
+// and i dont think I need to 
 
 // -------------------------------------------
+// Serial Maker 
+
+var serial_maker = function () {
+	
+	var prefix = 's'; 
+	var seq = 0; 
+
+	return {
+		set_prefix: function (p) {
+			prefix = String(p);
+			console.log('predix set');
+		},
+		set_seq: function (s) {
+			seq = s; 
+		},
+		gensym: function () {
+			var result = prefix + seq; 
+			seq += 1; 
+			return result; 
+		}
+	};
+}; 
+
+var seqer = serial_maker(); 
+seqer.set_prefix('QZX'); //???
+seqer.set_seq(1000); 
+var unique = seqer.gensym();
+
+console.log(unique);
+
+//Yeh cool I understand serial maker 0
 
 
 </script> 
