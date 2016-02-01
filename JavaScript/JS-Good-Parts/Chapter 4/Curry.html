@@ -1,0 +1,138 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body> 
+
+<script> 
+
+// LIBRARY --------------------------------------
+
+Function.prototype.method = function (name, func) {
+	this.prototype[name] = func; 
+	return this; 
+};
+
+var add = function (a, b) {
+	return a + b; 
+}; 
+
+// *********************************************
+// SCRIBBLE CODE *******************************
+// *********************************************
+
+
+
+// ----------------------------------------------
+
+Function.prototype.curry = function () {
+	
+	var slice = Array.prototype.slice;
+	var args = slice.apply(arguments); // I don't get how this doesn't need to specify object 
+	var that = this; 
+
+	return function() { 
+		return that.apply(null, args.concat(slice.apply(arguments)));  
+	};
+} 
+
+var add1 = add.curry(1); 
+
+console.log(add1(6));
+
+// ----------------------------------------------------------
+// CODE EXPLANATION ----------------------------------------- 
+// ----------------------------------------------------------
+
+// 1. store the array's slice method
+// 2. generate an array of arguments in args because we need to use Array.prototype.concat on it 
+// 3. store this 
+// 4. create closure of 
+
+// **********************************************************
+// STUFF TO DEAL WITH ***************************************
+// **********************************************************
+
+// **********
+// TO DO: prove why the below add function doesn't work with the curry method 
+// **********
+// var add = function(num) {
+// 	var number = 0; 
+// 	return number += num; 
+// }
+// **********
+// TO DO: prove why add1 can't take multiple args 
+// ********** 
+// **********
+// CODE: this is the function that douggie crock uses to make function methods but i'm
+// using my own above because fuck the crock man.  
+// **********
+// Function.method('curry', function () {
+// 	var slice = Array.prototype.slice;
+// 	console.log(slice); 
+// 	var args = slice.apply(arguments);
+// 	console.log(args);
+// 	var that = this;
+// 	console.log(that); 
+
+// 	return function() {
+// 		return that.apply(null, args.concat(slice.apply(arguments))); 
+// 	};
+// }); 
+
+
+
+</script> 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
