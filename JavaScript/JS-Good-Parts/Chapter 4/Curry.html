@@ -29,7 +29,7 @@ var add = function (a, b) {
 Function.prototype.curry = function () {
 	
 	var slice = Array.prototype.slice;
-	var args = slice.apply(arguments); // I don't get how this doesn't need to specify object 
+	var args = slice.apply(arguments); 
 	var that = this; 
 
 	return function() { 
@@ -58,10 +58,6 @@ console.log(add1(6));  	   		// Result: returns the the return value of the clos
 
 // Currying is essentially the creation of a new function based on an old function except with a static/unchanging argument. 
 // When calling this new function, this static/unchanging argument will be concatenated to your parameters in the invocation.
-
-
-
-
 
 // **********************************************************
 // STUFF TO DEAL WITH ***************************************
