@@ -1,0 +1,128 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body> 
+
+<script> 
+
+// LIBRARY --------------------------------------
+
+Function.prototype.method = function (name, func) {
+	this.prototype[name] = func; 
+	return this; 
+};
+
+var add = function (a, b) {
+	return a + b; 
+}; 
+
+// **********************************************************
+// SCRIBBLE CODE ********************************************
+// **********************************************************
+
+// ----------------------------------------------------------
+// CODE  ---------------------------------------------------- 
+// ----------------------------------------------------------
+
+
+var slowFibonacci = function (n) { 
+	return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2); 
+}; 
+
+var fibonacci = function () {
+	
+	var memo = [0, 1]; 
+
+	var fib = function (n) {
+		
+		var result = memo[n]; 
+		
+		if (typeof result !== 'number') {
+			result = fib(n - 1) + fib(n - 2); 
+			memo[n] = result; 
+		}
+
+		return result; 
+	}
+	return fib; 
+}();
+
+// ----------------------------------------------------------
+// CODE EXPLANATION ----------------------------------------- 
+// ----------------------------------------------------------
+
+// slowFibonacci 
+//	- exit recursion when n is less than 2 
+//	- how does it return the sum of numbers? 
+
+// fibonacci [Memoized]
+// 1. Create private memoized results array 
+// 2. check to see if value user passed in is in the memoized array
+// 3. check if the value is not there 
+// 4. fib recurrsion starts 
+//		- 
+//		- 
+
+// ----------------------------------------------------------
+// CONCEPT EXPLANATION --------------------------------------
+// ----------------------------------------------------------
+
+// **********************************************************
+// STUFF TO DEAL WITH ***************************************
+// ********************************************************** 
+
+</script> 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
