@@ -36,16 +36,16 @@ var slowFibonacci = function (n) {
 var fibonacci = function () {
 	
 	var memo = [0, 1]; 
-
+	
 	var fib = function (n) {
 		
 		var result = memo[n]; 
-		
 		if (typeof result !== 'number') {
+
 			result = fib(n - 1) + fib(n - 2); 
 			memo[n] = result; 
 		}
-
+		console.log(memo); 
 		return result; 
 	}
 	return fib; 
@@ -64,7 +64,6 @@ var fibonacci = function () {
 // 2. check to see if value user passed in is in the memoized array
 // 3. check if the value is not there 
 // 4. fib recurrsion starts 
-//		- 
 //		- 
 
 // ----------------------------------------------------------
