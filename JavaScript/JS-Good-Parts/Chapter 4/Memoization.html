@@ -16,9 +16,18 @@ Function.prototype.method = function (name, func) {
 	return this; 
 };
 
+Function.prototype.loop = function (iterate) {
+	console.log(this); 
+	for(i = 0; i < iterate; i++) {
+
+	}
+}
+
 var add = function (a, b) {
 	return a + b; 
 }; 
+
+
 
 // **********************************************************
 // SCRIBBLE CODE ********************************************
@@ -29,27 +38,34 @@ var add = function (a, b) {
 // ----------------------------------------------------------
 
 
+
 var slowFibonacci = function (n) { 
-	return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2); 
+	if(n < 2) {
+		return n; 
+	} else {
+		return slowFibonacci(n - 1) + slowFibonacci(n - 2); 
+	}
 }; 
 
 var fibonacci = function () {
-	
 	var memo = [0, 1]; 
-	
 	var fib = function (n) {
-		
 		var result = memo[n]; 
 		if (typeof result !== 'number') {
-
 			result = fib(n - 1) + fib(n - 2); 
 			memo[n] = result; 
 		}
-		console.log(memo); 
 		return result; 
 	}
 	return fib; 
 }();
+
+// ----------------------------------------------------------
+// LEFT OFF FEB 5 ------------------------------------------- 
+// ----------------------------------------------------------
+
+// - your attempt at function prototype didnt go too well 
+// - i'd still like you to fully explain the the concept 
 
 // ----------------------------------------------------------
 // CODE EXPLANATION ----------------------------------------- 
