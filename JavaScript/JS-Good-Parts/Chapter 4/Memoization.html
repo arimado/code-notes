@@ -43,29 +43,38 @@ var slowFibonacci = function (n) {
 	if(n < 2) {
 		return n; 
 	} else {
+		console.log('fib');
 		return slowFibonacci(n - 1) + slowFibonacci(n - 2); 
 	}
 }; 
 
 var fibonacci = function () {
 	var memo = [0, 1]; 
+
 	var fib = function (n) {
-		var result = memo[n]; 
-		if (typeof result !== 'number') {
+		console.log('fib')
+		var result = memo[n]; 				// these two lines are key to keeping the fib functions from 
+		if (typeof result !== 'number') {  	// working too hard 	
 			result = fib(n - 1) + fib(n - 2); 
 			memo[n] = result; 
+		} else {
+			console.log('fib n-' + result + ' is already in the array!');
 		}
+		console.log(memo);
+		console.log(result); 
 		return result; 
 	}
-	return fib; 
+		return fib; 
 }();
 
-// ----------------------------------------------------------
-// LEFT OFF FEB 5 ------------------------------------------- 
-// ----------------------------------------------------------
+for (var i = 0; i <= 6; i++) {
+	fibonacci(i);
+	// console.log(i + ' : ' + fibonacci(i)); 
+} 
 
-// - your attempt at function prototype didnt go too well 
-// - i'd still like you to fully explain the the concept 
+// for (var i = 0; i <= 10; i++) {
+// 	console.log(i + ' : ' + slowFibonacci(i)); 
+// }
 
 // ----------------------------------------------------------
 // CODE EXPLANATION ----------------------------------------- 
@@ -77,10 +86,11 @@ var fibonacci = function () {
 
 // fibonacci [Memoized]
 // 1. Create private memoized results array 
-// 2. check to see if value user passed in is in the memoized array
-// 3. check if the value is not there 
-// 4. fib recurrsion starts 
-//		- 
+// 2. check to see if the nth fib number is in the array 
+//		- this needs to happen because 
+
+
+// at a high number the fib function wont continue down the chain as 
 
 // ----------------------------------------------------------
 // CONCEPT EXPLANATION --------------------------------------
