@@ -67,14 +67,35 @@ var fibonacci = function () {
 		return fib; 
 }();
 
-for (var i = 0; i <= 6; i++) {
-	fibonacci(i);
-	// console.log(i + ' : ' + fibonacci(i)); 
-} 
+// for (var i = 0; i <= 6; i++) {
+// 	fibonacci(i);
+// 	// console.log(i + ' : ' + fibonacci(i)); 
+// }; 
 
 // for (var i = 0; i <= 10; i++) {
 // 	console.log(i + ' : ' + slowFibonacci(i)); 
 // }
+
+var memoizer = function (memo, fundemental) {
+	var shell = function (n) {
+		var result = memo[n];
+		if (typeof result !== 'number') {
+			result = fundemental(shell, n);
+			memo[n] = result; 
+		}
+		return result; 
+	}; 
+	return shell; 
+}; 
+
+var memFibonacci = memoizer([0,1], function(shell, n) { 
+	return shell(n - 1) + shell(n - 2); 
+}); 
+
+for (var i = 0; i <= 10; i++) {
+	console.log(memFibonacci(i));
+};
+
 
 // ----------------------------------------------------------
 // CODE EXPLANATION ----------------------------------------- 
@@ -88,17 +109,35 @@ for (var i = 0; i <= 6; i++) {
 // 1. Create private memoized results array 
 // 2. check to see if the nth fib number is in the array 
 //		- this needs to happen because 
+// 			- in the recursive fib function it returns fib 
+//			  numbers that have already been worked out 
+//				- ie. when it gets to the lower n values then 
+//				   it will stop executing as one of the the 
+//				   already exist in the memo array
+//				- a high number passed into the fib function 
+//				  would mean there will be alot of trees tyring
+//				  to execute lower values 
 
 
-// at a high number the fib function wont continue down the chain as 
+// memFibonacci [via memoizer]
+// 1. declare memFibonacci funciton bia invoking memoizer and passing the memo array and fundenmental function
+// 2. the shell function is the containing function to be used as the filter
+// 3. fundemental is the function to be executed 
 
 // ----------------------------------------------------------
 // CONCEPT EXPLANATION --------------------------------------
 // ----------------------------------------------------------
 
+// Memoization is basically letting a function 'cache' returned
+// values in an effort to reduce executions. 
+
 // **********************************************************
 // STUFF TO DEAL WITH ***************************************
 // ********************************************************** 
+
+
+
+
 
 </script> 
 </body>
