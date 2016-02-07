@@ -55,38 +55,88 @@ Function.method('inherits', function (Parent) {
 // SCRIBBLE CODE ********************************************
 // **********************************************************
 
+
 // ----------------------------------------------------------
 // CODE  ---------------------------------------------------- 
 // ---------------------------------------------------------- 
 
-var myMammal = {
-	name: 'Herb the Mammal', 
-	get_name: function () {
-		return this.name; 
-	}, 
-	says: function () {
-		return this.saying || ''; 
+
+// Functional Pattern Example -------------------------------
+
+var constructor = function (spec, my) {
+	var that; 
+
+	// private instance variables and methods for the object 
+	// this is done my declaring variables 
+
+	var methodical = function () {
+		//code here 
 	}
-};
 
-var myCat = Object.create(myMammal); 
+	my = my || {}; 
+	a
+	// add your shared secrets to the my object
+	// my.member = value; 
 
-myCat.name = 'Henrietta'; 
-myCat.saying = 'meow'; 
-myCat.purr = function (n) {
-	var i, s = ''; 
-	for (i = 0; i < n; i++) {
-		if(s) {
-			s += '-'; 
+	that = {};  // this is where you create the object 
+
+	that.methodical = methodical; 
+	//adding privileged methods this way insures all other functions in this scope has access to methodical(); 
+	//if the instance is fucked with methodical will continue to work 
+	//this is in contrast with definining it like this that.methodical = function(){}; 
+
+	return that; 
+}
+
+// -------------------------------------------------------
+
+var mammal = function(spec) {
+	
+	var that = {}; 
+
+	that.get_name = function () {
+		return spec.name; 
+	}; 
+
+	that.says = function () {
+		return spec.saying || ''; 
+	}; 
+
+	return that; 
+}
+
+var myMammal = mammal({name: 'Herb'}); 
+
+
+var cat = function (spec) {
+	
+	spec.saying = spec.saying || 'meow'; 
+	
+	// *********************
+	var that = mammal(spec); 
+	// *********************
+	
+	that.purr = function (n) {
+		var i, s = ''; 
+		for (i = 0; i < n; i++) {
+			if(s) {
+				s += '-'; 
+			}
+			s += 'r'; 
 		}
-		s += 'r'; 
+		return s; 
 	}
-	return s; 
-};
-myCat.get_name = function () {
-	return this.says() + ' ' + this.name + ' ' + this.says();
-};
 
+	that.get_name = function () {
+		return that.says() + ' ' + spec.name + ' ' + that.says();
+	}
+
+	return that;
+}; 
+
+var myCat = cat({name: 'Barf-field'}); 
+
+console.dir(myCat);
 
 var says = myCat.says(); 
 console.dir(says);
@@ -97,15 +147,6 @@ console.dir(purr);
 var name = myCat.get_name(); 
 console.dir(name); 
 
-var block = function () {
-	var oldScope = scope; 
-	scope = Object.create(scope); 
-	advance('{'); 
-	parse(scope); 
-	advance('}');
-	scope = oldScope; 
-}; 
-
 // ----------------------------------------------------------
 // CODE EXPLANATION ----------------------------------------- 
 // ---------------------------------------------------------- 
@@ -114,21 +155,12 @@ var block = function () {
 // CONCEPT EXPLANATION --------------------------------------
 // ----------------------------------------------------------  
 
-// Differences between Prototypal and Pseudoclassical
-// psudoclassical 
-// - classed in the form of prototypes and the new keyword 
-
-// Prototypal 
-// in the form of objects 
-// does it work with functions though?
-
-
 // **********************************************************
 // STUFF TO DEAL WITH ***************************************
 // **********************************************************
 
-// Don't get what's happening on line 69-72 
-// What's supposed to be happening 
+// Investigate line 115-117
+
 
 </script> 
 </body>
