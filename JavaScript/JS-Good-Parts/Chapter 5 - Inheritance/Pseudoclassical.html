@@ -1,0 +1,174 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body> 
+
+<script> 
+
+// LIBRARY --------------------------------------
+
+Function.prototype.method = function (name, func) {
+	this.prototype[name] = func; 
+	return this; 
+};
+
+Function.prototype.loop = function (iterate) {
+	console.log(this); 
+	for(i = 0; i < iterate; i++) {
+
+	}
+}
+
+var add = function (a, b) {
+	return a + b; 
+}; 
+
+var memoizer = function (memo, fundemental) {
+	var shell = function (n) {
+		var result = memo[n];
+		if (typeof result !== 'number') {
+			result = fundemental(shell, n);
+			memo[n] = result; 
+		}
+		return result; 
+	}; 
+	return shell; 
+}; 
+
+Function.method('new', function () {
+
+	//1. this refers to the containing object context. 
+	//in this case it is the function being operated on - "Mammal"
+	console.log('this -------');
+	console.dir(this); 
+
+	//2. this.prototype refers to the prototype property of the contextual object "Mammal"
+	// prototype is an object that contains the constructor property 
+	// and in this case 2 methods 
+	
+	console.log('this.prototype -------');
+	console.dir(this.prototype); 
+
+	// 2. using Object.create() [ES5] we can create an object using Object.create(); 
+	//		Object.create() parameters
+	//		- prototype object
+	//		- properties object 
+	//
+	//	  thus "that" is an object that shares the prototype of the contextual objects prototype ("Mammal")
+	var that = Object.create(this.prototype); 
+	console.log('Object.create(this.prototype); -------');
+	console.dir(that); 
+
+	// so we have the prototype of the contextual object
+	// and created a new object "that" which shares the above prototype
+
+	// 3. 
+	var other = this.apply(that, arguments);  //make that inherit 
+	console.log('this.apply(that, arguments); -------');
+	console.log(other);  
+
+	return (typeof other === 'object' && other) || that; // Returns a function/object or something 
+}); 
+
+// **********************************************************
+// SCRIBBLE CODE ********************************************
+// **********************************************************
+
+// ----------------------------------------------------------
+// CODE  ---------------------------------------------------- 
+// ---------------------------------------------------------- 
+
+var Mammal = function (name) {
+	this.name = name; 
+}; 
+
+// Using old mate D-Crock's prototype maker function 
+Mammal.method('get_name', function(){
+	return this.name;
+}); 
+
+// Mammal.prototype.get_name = function () {
+// 	return this.name; 
+// }; 
+
+Mammal.prototype.says = function () {
+	return this.saying || ''; 
+}; 
+
+var myMammal = Mammal.new('hello'); 
+var name = myMammal.get_name(); 
+
+console.dir(name); 
+
+// ----------------------------------------------------------
+// CODE EXPLANATION ----------------------------------------- 
+// ----------------------------------------------------------
+
+// Method 
+
+
+
+
+// ----------------------------------------------------------
+// CONCEPT EXPLANATION --------------------------------------
+// ----------------------------------------------------------  
+
+// **********************************************************
+// STUFF TO DEAL WITH ***************************************
+// **********************************************************
+
+</script> 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
