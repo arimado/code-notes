@@ -59,6 +59,7 @@ Function.method('new', function () {
 	//		- properties object 
 	//
 	//	  thus "that" is an object that shares the prototype of the contextual objects prototype ("Mammal")
+
 	var that = Object.create(this.prototype); 
 	console.log('Object.create(this.prototype); -------');
 	console.dir(that); 
@@ -66,12 +67,21 @@ Function.method('new', function () {
 	// so we have the prototype of the contextual object
 	// and created a new object "that" which shares the above prototype
 
-	// 3. 
+	// 3. looks like this Mammal.apply(newObj, Arguments); 
+	// - invoke the Mammal function on the new object 
+	// - 
+
 	var other = this.apply(that, arguments);  //make that inherit 
 	console.log('this.apply(that, arguments); -------');
 	console.log(other);  
 
 	return (typeof other === 'object' && other) || that; // Returns a function/object or something 
+}); 
+
+Function.method('inherits', function (Parent) {
+	this.prototype = Parent.new(); // DC 
+	// this.prototype = new Parent(); // JS
+	return this;
 }); 
 
 // **********************************************************
@@ -83,34 +93,101 @@ Function.method('new', function () {
 // ---------------------------------------------------------- 
 
 var Mammal = function (name) {
-	this.name = name; 
+	this.name = name;
 }; 
 
+// [USING DC 'NEW METHOD']
 // Using old mate D-Crock's prototype maker function 
-Mammal.method('get_name', function(){
-	return this.name;
-}); 
+// Mammal.method('get_name', function(){
+// 	return this.name;
+// }); 
 
-// Mammal.prototype.get_name = function () {
-// 	return this.name; 
-// }; 
+Mammal.prototype.get_name = function () {
+	return this.name; 
+}; 
 
 Mammal.prototype.says = function () {
 	return this.saying || ''; 
 }; 
 
-var myMammal = Mammal.new('hello'); 
+// [USING DC 'NEW METHOD']
+//var myMammal = Mammal.new('hello'); 
+
+var myMammal = new Mammal('Herb the Mammal'); 
 var name = myMammal.get_name(); 
 
 console.dir(name); 
 
+// another pseudoclass ------------------------------------ 
+
+// [Normal JS way]
+
+// var Cat = function (name) {
+// 	this.name = name;
+// 	this.saying = 'meow'; 
+// }
+
+// Cat.prototype = new Mammal();
+
+// console.log('Cat.prototype -------');
+// console.dir(Cat.prototype); 
+
+// Cat.prototype.purr = function (n) {
+// 	var i, s = ''; 
+
+// 	for(i = 0; i < n; i++) {
+// 		if (s) {
+// 			s += '-'; 
+// 		}
+// 		s += 'r'; 
+// 	} 
+// 	return s; 
+// }; 
+
+// Cat.prototype.get_name = function () {
+// 	return this.says() + ' ' + this.name + ' ' + this.says(); 
+// }; 
+
+// [using Doug Crock inherits method] 
+// Douggie's methods 'inherit' and 'inherits' all return 'this' so you can cascade them as so: 
+
+var Cat = function (name) {
+	this.name = name; 
+	this.saying = 'meow'; 
+}
+	.inherits(Mammal)
+		.method('purr', function(n) {
+				var i, s = ''; 
+				for (i = 0; i < n; i++) {
+					if(s) {
+						s += '-'; 
+					}
+					s += 'r'; 
+				}
+				return s; 
+			})
+			.method('get_name', function () {
+				return this.says() + ' ' + this.name + ' ' + this.says();  
+			});   
+
+
+console.dir(Cat); 
+
+var myCat = new Cat('Henrietta');
+
+var says = myCat.says(); 
+console.dir(says);
+
+var purr = myCat.purr(5); 
+console.dir(purr);
+
+var name = myCat.get_name(); 
+console.dir(name); 
+
+
 // ----------------------------------------------------------
 // CODE EXPLANATION ----------------------------------------- 
 // ----------------------------------------------------------
-
-// Method 
-
-
 
 
 // ----------------------------------------------------------
@@ -120,6 +197,9 @@ console.dir(name);
 // **********************************************************
 // STUFF TO DEAL WITH ***************************************
 // **********************************************************
+
+// Don't get what's happening on line 69-72 
+// What's supposed to be happening 
 
 </script> 
 </body>
