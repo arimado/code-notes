@@ -96,18 +96,18 @@ var mammal = function(spec) {
 	//private methods
 
 	var get_name = function() {
-		spec.name; 
+		return spec.name; 
 	}
 
 	var says = function() {
-		spec.saying || ''; 
+		return spec.saying || ''; 
 	}
 
 	// intialise new object 
 	var that = {}; 
 
 	that.get_name = get_name; 
-	that.says = says;
+	that.says = says; 
 
 	return that; 
 }
@@ -116,11 +116,13 @@ var myMammal = mammal({name: 'Herb'});
 
 var cat = function (spec) {
 	
-	spec.saying = spec.saying || 'meow'; 
+	spec.saying = spec.saying || 'meow';  
 
 	// *********************
 	var that = mammal(spec); 
 	// *********************
+
+	console.dir(that.says); 
 	
 	that.purr = function (n) {
 		var i, s = ''; 
