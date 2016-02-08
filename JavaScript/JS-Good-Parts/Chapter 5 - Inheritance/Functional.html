@@ -11,6 +11,7 @@
 
 // LIBRARY --------------------------------------
 
+// method becomes an object of the function ibject
 Function.prototype.method = function (name, func) {
 	this.prototype[name] = func; 
 	return this; 
@@ -21,7 +22,7 @@ Function.prototype.loop = function (iterate) {
 	for(i = 0; i < iterate; i++) {
 
 	}
-}
+}; 
 
 var add = function (a, b) {
 	return a + b; 
@@ -49,6 +50,20 @@ Function.method('inherits', function (Parent) {
 	this.prototype = Parent.new(); // DC 
 	// this.prototype = new Parent(); // JS
 	return this;
+}); 
+
+Object.method('superior', function (name){
+
+	var that = this; 
+	var method = that[name];
+
+	// return a function that invokes that method 
+	// but why does it need to be a function? 
+	// - i think because you would then just be returning the 
+
+	return function() {
+		return method.apply(that, arguments); 
+	}; 
 }); 
 
 // **********************************************************
@@ -180,6 +195,29 @@ console.dir(myLion.says());
 console.dir(myLion.purr(5));
 console.dir(myLion.get_name()); 
 
+// SUPERIOIR METHOD ......................................... 
+
+// The below code uses an added object 
+
+var coolcat = function(spec) {
+	
+	var that = cat(spec); 
+	var super_get_name = that.superior('get_name'); 
+	
+	that.get_name = function (n) {
+		return 'like ' + super_get_name() + ' baby'; 
+	}; 
+
+	return that; 
+}; 
+
+console.log('Coolcat -------------------------'); 
+
+var myCoolCat = coolcat({name: 'Bix'}); 
+
+console.dir(myCoolCat); 
+console.dir(myCoolCat.get_name());
+
 
 // ----------------------------------------------------------
 // CODE EXPLANATION ----------------------------------------- 
@@ -193,7 +231,11 @@ console.dir(myLion.get_name());
 // STUFF TO DEAL WITH ***************************************
 // **********************************************************
 
-// Investigate line 115-117
+// Investigate line 115-117 [SOLVED]
+
+// Why is Function.prototype and Object.protoype interchanchable
+// when defining the 'method' creator; 
+//
 
 
 </script> 
