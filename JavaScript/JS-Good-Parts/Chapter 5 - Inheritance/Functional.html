@@ -71,14 +71,15 @@ var constructor = function (spec, my) {
 
 	var methodical = function () {
 		//code here 
-	}
+	} 
 
 	my = my || {}; 
-	a
+
 	// add your shared secrets to the my object
 	// my.member = value; 
 
 	that = {};  // this is where you create the object 
+				// this could have been made with 'new' or object.create(); 
 
 	that.methodical = methodical; 
 	//adding privileged methods this way insures all other functions in this scope has access to methodical(); 
@@ -92,26 +93,31 @@ var constructor = function (spec, my) {
 
 var mammal = function(spec) {
 	
+	//private methods
+
+	var get_name = function() {
+		spec.name; 
+	}
+
+	var says = function() {
+		spec.saying || ''; 
+	}
+
+	// intialise new object 
 	var that = {}; 
 
-	that.get_name = function () {
-		return spec.name; 
-	}; 
-
-	that.says = function () {
-		return spec.saying || ''; 
-	}; 
+	that.get_name = get_name; 
+	that.says = says;
 
 	return that; 
 }
 
 var myMammal = mammal({name: 'Herb'}); 
 
-
 var cat = function (spec) {
 	
 	spec.saying = spec.saying || 'meow'; 
-	
+
 	// *********************
 	var that = mammal(spec); 
 	// *********************
