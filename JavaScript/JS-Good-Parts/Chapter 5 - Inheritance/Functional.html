@@ -52,20 +52,6 @@ Function.method('inherits', function (Parent) {
 	return this;
 }); 
 
-Object.method('superior', function (name){
-
-	var that = this; 
-	var method = that[name];
-
-	// return a function that invokes that method 
-	// but why does it need to be a function? 
-	// - i think because you would then just be returning the 
-
-	return function() {
-		return method.apply(that, arguments); 
-	}; 
-}); 
-
 // **********************************************************
 // SCRIBBLE CODE ********************************************
 // **********************************************************
@@ -199,11 +185,32 @@ console.dir(myLion.get_name());
 
 // The below code uses an added object 
 
+Object.method('superior', function (name){
+
+	var that = this; 
+	var method = that[name];
+
+	// return a function that invokes that method 
+	// but why does it need to be a function? 
+	// - i think because you would then just be returning the 
+
+	return function() {
+		return method.apply(that, arguments); 
+	}; 
+
+	// return method.apply(that, arguments); 
+
+}); 
+
 var coolcat = function(spec) {
 	
 	var that = cat(spec); 
 	var super_get_name = that.superior('get_name'); 
 	
+	console.log('--- super get name ---');
+	console.dir(super_get_name);
+	console.log('--- super get name ---'); 
+
 	that.get_name = function (n) {
 		return 'like ' + super_get_name() + ' baby'; 
 	}; 
@@ -218,6 +225,17 @@ var myCoolCat = coolcat({name: 'Bix'});
 console.dir(myCoolCat); 
 console.dir(myCoolCat.get_name());
 
+// ----------------------------------------------------------
+// LEFT OFF ------------------------------------------------- 
+// ----------------------------------------------------------
+
+// - not understanding why adding methods to Function and Object are interchageable 
+// - still not fully understanding apply 
+// - not udnerstanding that bloody superior making method
+// - the point of it was to make a method that you would call that would call itself despite of something 
+// i reckon
+// 1. give it another read
+// 2. consider doing apply() bind() call() [might not need to]
 
 // ----------------------------------------------------------
 // CODE EXPLANATION ----------------------------------------- 
@@ -235,7 +253,8 @@ console.dir(myCoolCat.get_name());
 
 // Why is Function.prototype and Object.protoype interchanchable
 // when defining the 'method' creator; 
-//
+
+// Left off
 
 
 </script> 
