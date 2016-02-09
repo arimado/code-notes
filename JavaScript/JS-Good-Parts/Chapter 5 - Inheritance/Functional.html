@@ -170,14 +170,14 @@ var lion = function (spec) {
 	return that; 
 }
 
-console.log('Lion -------------------------'); 
+// console.log('Lion -------------------------'); 
 
-var myLion = lion({name: 'DEADPOOL', saying: 'lol so meta'}); 
+// var myLion = lion({name: 'DEADPOOL', saying: 'lol so meta'}); 
 
-console.dir(myLion);
-console.dir(myLion.says());
-console.dir(myLion.purr(5));
-console.dir(myLion.get_name()); 
+// console.dir(myLion);
+// console.dir(myLion.says());
+// console.dir(myLion.purr(5));
+// console.dir(myLion.get_name()); 
 
 // SUPERIOIR METHOD ......................................... 
 
@@ -188,6 +188,7 @@ Object.method('superior', function (name){
 	// in this case this is adding a  
 	var method = that[name];
 
+	// all this does is apply the method on ther
 	return function() {								// dont get why this needs to be wrapped in a 
 		return method.apply(that, arguments); 		// it actually works without it being wrapped 
 	}; 												// - possible for arguments? 
@@ -199,12 +200,11 @@ var coolcat = function(spec) {
 	// init object
 	var that = cat(spec); 
 
-
+	// gets the get_name method from parent object? 
+	// yes
+	// and it will invoke it even though below you changed it... 
+	// LOL U FKN U IDIOT 
 	var super_get_name = that.superior('get_name'); 
-	
-	console.log('--- super get name ---');
-	console.dir(super_get_name);
-	console.log('--- super get name ---'); 
 
 	that.get_name = function (n) {
 		return 'like ' + super_get_name() + ' baby'; 
