@@ -1,0 +1,108 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+<script> 
+
+// LIBRARY --------------------------------------
+
+// method becomes an object of the function ibject
+Function.prototype.method = function (name, func) {
+	this.prototype[name] = func; 
+	return this; 
+};
+
+Function.prototype.loop = function (iterate) {
+	console.log(this); 
+	for(i = 0; i < iterate; i++) {
+
+	}
+}; 
+
+var add = function (a, b) {
+	return a + b; 
+}; 
+
+var memoizer = function (memo, fundemental) {
+	var shell = function (n) {
+		var result = memo[n];
+		if (typeof result !== 'number') {
+			result = fundemental(shell, n);
+			memo[n] = result; 
+		}
+		return result; 
+	}; 
+	return shell; 
+}; 
+
+Function.method('new', function () {
+	var that = Object.create(this.prototype); 
+	var other = this.apply(that, arguments);  
+	return (typeof other === 'object' && other) || that; 
+}); 
+
+Function.method('inherits', function (Parent) {
+	this.prototype = Parent.new(); // DC 
+	// this.prototype = new Parent(); // JS
+	return this;
+}); 
+
+// **********************************************************
+// SCRIBBLE CODE ********************************************
+// **********************************************************
+
+// ----------------------------------------------------------
+// CODE  ---------------------------------------------------- 
+// ---------------------------------------------------------- 
+
+// Construction invocation 
+
+var Quo = function (string) {
+	this.status = string; 
+}; 
+
+Quo.prototype.get_status = function () {
+	return this.status; 
+}; 
+
+var myQuo = new Quo("confused");
+
+console.log(myQuo.get_status()); 
+
+// Apply Invocation Pattern 
+
+var array = [3, 4]; 
+var sum = add.apply(null, array);
+
+var statusObject = {
+	status: 'A-OK' 
+}; 
+
+var status = Quo.prototype.get_status.apply(statusObject); 
+
+console.dir(status); 
+
+
+// ----------------------------------------------------------
+// LEFT OFF ------------------------------------------------- 
+// ----------------------------------------------------------
+
+// ----------------------------------------------------------
+// CODE EXPLANATION ----------------------------------------- 
+// ---------------------------------------------------------- 
+
+// ----------------------------------------------------------
+// CONCEPT EXPLANATION --------------------------------------
+// ----------------------------------------------------------  
+
+// **********************************************************
+// STUFF TO DEAL WITH ***************************************
+// **********************************************************
+
+</script> 
+</body>
+</html>
