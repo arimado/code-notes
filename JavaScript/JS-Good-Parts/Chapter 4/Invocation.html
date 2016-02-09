@@ -82,7 +82,14 @@ var statusObject = {
 	status: 'A-OK' 
 }; 
 
+var functionObject = function () { 
+	this.status = "I'm fucked cunt"; ther
+}
+
+
 var status = Quo.prototype.get_status.apply(statusObject); 
+
+
 
 console.dir(status); 
 
