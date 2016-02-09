@@ -74,18 +74,16 @@ var constructor = function (spec, my) {
 		//code here 
 	} 
 
-	my = my || {}; 
-
-	// add your shared secrets to the my object
-	// my.member = value; 
+	my = my || {}; 	// add your shared secrets to the my object
+					// this is shared because this is passed from the childeren to the parent
+					// my.member = value; 
 
 	that = {};  // this is where you create the object 
 				// this could have been made with 'new' or object.create(); 
 
-	that.methodical = methodical; 
-	//adding privileged methods this way insures all other functions in this scope has access to methodical(); 
-	//if the instance is fucked with methodical will continue to work 
-	//this is in contrast with definining it like this that.methodical = function(){}; 
+	that.methodical = methodical; 	//adding privileged methods this way insures all other functions in this scope has access to methodical(); 
+									//if the instance is fucked with methodical will continue to work 
+									//this is in contrast with definining it like this that.methodical = function(){}; 
 
 	return that; 
 }
@@ -101,11 +99,11 @@ var mammal = function(spec) {
 	var says = function() { return spec.saying || ''; }
 
 	// intialise new object 
-	var that = {};  
+	var that = {};
 
 	//add private methods to new object 
 	that.get_name = get_name; 
-	that.says = says;  
+	that.says = says; 
 
 	//return object 
 	return that; 
@@ -183,28 +181,25 @@ console.dir(myLion.get_name());
 
 // SUPERIOIR METHOD ......................................... 
 
-// The below code uses an added object 
-
 Object.method('superior', function (name){
 
 	var that = this; 
+	// add a property to the contextual object 
+	// in this case this is adding a  
 	var method = that[name];
 
-	// return a function that invokes that method 
-	// but why does it need to be a function? 
-	// - i think because you would then just be returning the 
-
-	return function() {
-		return method.apply(that, arguments); 
-	}; 
-
-	// return method.apply(that, arguments); 
+	return function() {								// dont get why this needs to be wrapped in a 
+		return method.apply(that, arguments); 		// it actually works without it being wrapped 
+	}; 												// - possible for arguments? 
 
 }); 
 
 var coolcat = function(spec) {
 	
+	// init object
 	var that = cat(spec); 
+
+
 	var super_get_name = that.superior('get_name'); 
 	
 	console.log('--- super get name ---');
@@ -216,7 +211,7 @@ var coolcat = function(spec) {
 	}; 
 
 	return that; 
-}; 
+};
 
 console.log('Coolcat -------------------------'); 
 
