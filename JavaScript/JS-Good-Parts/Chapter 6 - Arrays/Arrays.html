@@ -87,6 +87,25 @@ console.dir(numbers);
 
 // ..........................................................
 
+// isArray(DC) p59 ..........................................
+
+var is_array = function(value) {
+	return value &&
+		typeof value === 'object' && 
+		typeof value.length === 'number' &&
+		typeof value.splice === 'function' &&
+		!(value.propertyIsEnumerable('length')); 
+}; 
+
+console.log(is_array(numbers)); 
+
+
+// DO NOT UNDERSTAND:
+// just dont get short ciruiting
+// array window origin construction location 
+
+// ..........................................................
+
 // ----------------------------------------------------------
 // LEFT OFF ------------------------------------------------- 
 // ----------------------------------------------------------
