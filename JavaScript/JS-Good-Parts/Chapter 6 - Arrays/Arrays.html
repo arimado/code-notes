@@ -15,7 +15,7 @@
 Function.prototype.method = function (name, func) {
 	this.prototype[name] = func; 
 	return this; 
-};
+}; 
 
 Function.prototype.loop = function (iterate) {
 	console.log(this); 
@@ -134,14 +134,25 @@ var multiply = function (a, b) {
 	return a * b; 
 };
 
-console.log(data.reduce_dc(multiply));
+console.log(data.reduce_dc(add, 5));  		//60
+console.log(data.reduce_dc(multiply, 5)); 	//18144000 
 
-// Using t
+//giving the data Array Object a total method
 
+data.total = function () {					
+	return this.reduce_dc(add, 5);  		
+} 
 
+data.integer = 5; 
 
+console.dir(data);  									
+console.log(data.total()); 
 
+//Object Create and Arrays 
 
+var dataObj = Object.create(data); // this is not supposed to produce a length property 
+console.dir(dataObj); 			   // but it did... 
+console.log(dataObj.length); 
 
 // ..........................................................
 
@@ -157,9 +168,15 @@ console.log(data.reduce_dc(multiply));
 // CONCEPT EXPLANATION --------------------------------------
 // ----------------------------------------------------------  
 
+// Arrays can have propertys and methods 
+// if those properties are a number than the length property 
+// accounts for it 
+
 // **********************************************************
 // STUFF TO DEAL WITH ***************************************
 // **********************************************************
+
+//Prototype chain with arrays and Object.create() 
 
 </script> 
 </body>
