@@ -63,7 +63,7 @@ Function.method('inherits', function (Parent) {
 // LENGTH p59 ...............................................
 
 var myArray = [];
-console.dir(myArray.length); 
+// console.dir(myArray.length); 
 myArray[10000] = 'lol'; 
 // console.dir(myArray); // logs array with a single index of '1000'
 // 					  // instead of logging 1000 indexes and only one of them having a value 
@@ -74,13 +74,13 @@ myArray[10000] = 'lol';
 // DELETE p59 ...............................................
 
 var numbers = ['zero', 'one', 'two', 'shi', 'go']; 
-console.dir(numbers); 
+// console.dir(numbers); 
 
-// delete numbers[2]; 
-console.dir(numbers); 
+// // delete numbers[2]; 
+// console.dir(numbers); 
 
-numbers.splice(2, 1);
-console.dir(numbers); 
+// numbers.splice(2, 1);
+// console.dir(numbers); 
 
 // Hoisiting question: why does the the delete and splice
 // functions execute before the console logs? 
@@ -97,7 +97,7 @@ var is_array = function(value) {
 		!(value.propertyIsEnumerable('length')); 
 }; 
 
-console.log(is_array(numbers)); 
+// console.log(is_array(numbers)); 
 
 // DO NOT UNDERSTAND:
 // just dont get short ciruiting
@@ -134,8 +134,8 @@ var multiply = function (a, b) {
 	return a * b; 
 };
 
-console.log(data.reduce_dc(add, 5));  		//60
-console.log(data.reduce_dc(multiply, 5)); 	//18144000 
+// console.log(data.reduce_dc(add, 5));  		//60
+// console.log(data.reduce_dc(multiply, 5)); 	//18144000 
 
 //giving the data Array Object a total method
 
@@ -145,14 +145,40 @@ data.total = function () {
 
 data.integer = 5; 
 
-console.dir(data);  									
-console.log(data.total()); 
+// console.dir(data);  									
+// console.log(data.total()); 
 
-//Object Create and Arrays 
+// //Object Create and Arrays 
 
-var dataObj = Object.create(data); // this is not supposed to produce a length property 
-console.dir(dataObj); 			   // but it did... 
-console.log(dataObj.length); 
+// var dataObj = Object.create(data); // this is not supposed to produce a length property 
+// console.dir(dataObj); 			   // but it did... 
+// console.log(dataObj.length); 
+
+// ..........................................................
+
+// Dimensions ...............................................
+
+Array.dim = function (dimension, initial) {
+	
+	var a = []; // initialise array 
+	var i = i;
+
+	for (i = 0; i < dimension; i ++) {
+		a[i] = initial; 
+	} 
+
+	return a; 
+}; 
+
+console.dir(Array.dim(10, 0)); 
+
+// var arrayRef = Array.dim(10, []);  // this will get the same reference to the array;
+// arrayRef[0][0] = 'hi'; 
+// console.dir(arrayRef); 
+
+
+
+
 
 // ..........................................................
 
@@ -176,7 +202,7 @@ console.log(dataObj.length);
 // STUFF TO DEAL WITH ***************************************
 // **********************************************************
 
-//Prototype chain with arrays and Object.create() 
+//Prototype chain with arrays and Object.create();  
 
 </script> 
 </body>
