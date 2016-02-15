@@ -62,11 +62,24 @@ Function.method('inherits', function (Parent) {
 
 var parse_url = /^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;
 
-var url = "http://www.ora.com:80/goodparts?q#fragment";
+// 				/^							
+// 				(?:([A-Za-z]+):)?		http	(?:...) if follwed by colon then, suffix-? the group is optional 
+// 				(\/{0,3})				//
+// 				([0-9.\-A-Za-z]+)		wwww.hostname.com
+// 				(?::(\d+))?				port 
+// 				(?:\/([^?#]*))?			^-anything but ?, # | 
+// 				(?:\?([^#]*))?			anything but a # 
+// 				(?:#(.*))?				anything but 
+// 				$/; 					
+
+var url = "http://wws2w.ora.com:80/goodparts?q#fragmeasdasdnt"; 
 
 var result = parse_url.exec(url); 
 
-console.dir(result); 
+var result_bool = parse_url.test(url); 
+
+console.dir(result);  
+console.dir(result_bool); 
 
 // ----------------------------------------------------------
 // LEFT OFF ------------------------------------------------- 
