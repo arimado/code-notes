@@ -1,0 +1,336 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body> 
+
+<script> 
+
+// LIBRARY --------------------------------------
+
+// method becomes an object of the function ibject
+Function.prototype.method = function (name, func) {
+	this.prototype[name] = func; 
+	return this; 
+}; 
+
+Function.prototype.loop = function (iterate) {
+	console.log(this); 
+	for(i = 0; i < iterate; i++) {
+
+	}
+}; 
+
+var add = function (a, b) {
+	return a + b; 
+}; 
+
+var memoizer = function (memo, fundemental) {
+	var shell = function (n) {
+		var result = memo[n];
+		if (typeof result !== 'number') {
+			result = fundemental(shell, n);
+			memo[n] = result; 
+		}
+		return result; 
+	}; 
+	return shell; 
+}; 
+
+Function.method('new', function () {
+	var that = Object.create(this.prototype); 
+	var other = this.apply(that, arguments);  
+	return (typeof other === 'object' && other) || that; 
+}); 
+
+Function.method('inherits', function (Parent) {
+	this.prototype = Parent.new(); // DC 
+	// this.prototype = new Parent(); // JS
+	return this;
+}); 
+
+// **********************************************************
+// SCRIBBLE CODE ********************************************
+// **********************************************************
+
+// ----------------------------------------------------------
+// CODE  ---------------------------------------------------- 
+// ---------------------------------------------------------- 
+
+// CONCAT ...................................................
+
+var a = ['a', 'b', 'c']; 
+var b = ['x', 'y', 'z']; 
+
+var c = a.concat(b, 'fuck', 23, false); 
+
+console.log(c); // ["a", "b", "c", "x", "y", "z", "fuck", 23, false]
+
+// ..........................................................
+
+// JOIN .....................................................
+
+// PARAM - Seperator 
+
+var d = ['a', 'x', 'n']; 
+
+d.push('FUCK YOU'); 
+
+console.log(d.join('SEX')); //aSEXxSEXnSEXFUCK YOU
+
+// ..........................................................
+
+// POP ......................................................
+
+Array.prototype.pop_dc = function() {
+	return this.splice(this.length - 1, 1)[0]; 
+} 
+
+var e = ['lollzy1', 'lolzzy2', 'lollzzy3']; 
+
+console.log(e.pop_dc()); //lollzzy3
+console.log(e); 	  //["lollzy1", "lolzzy2"] 
+
+// ..........................................................
+
+// PUSH .....................................................
+
+Array.prototype.push_dc = function() {
+	this.slice.apply(
+		this, 
+		[this.length, 0]
+			.concat(Array.prototype.slice.apply(arguments))); 
+	return this.length; 
+} 
+
+var f = ['lollzy1', 'lolzzy2', 'lollzzy3']; 
+var g = ['a', 'x', 'n'];
+var h = ['a', 'b', 'c']; 
+
+var a1 = h.push_dc(f, g, h, false, 'cunt'); // 8
+
+console.log(h);  // ["a", "b", "c", Array[3], Array[3], Array[8], false, "cunt"] 
+
+// ..........................................................
+
+// REVERSE ..................................................
+
+var reversedArr = f.reverse(); 
+console.log(reversedArr); //["lollzzy3", "lolzzy2", "lollzy1"] 
+
+// ..........................................................
+
+// SHIFT ....................................................
+
+// removes first element and returns it 
+
+var f1 = ['lollzy1', 'lolzzy2', 'lollzzy3']; 
+
+var shiftF1 = f1.shift(); 
+
+console.log(f1); 		//["lolzzy2", "lollzzy3"]
+console.log(shiftF1); 	//lollzy1 
+
+// .......................................................... 
+
+// SLICE ....................................................
+
+var f2 = ['lollzy1', 'lolzzy2', 'lollzzy3']; 
+
+var spliceF2 = f2.splice(1, 2); 
+
+console.log(f2); 			//["lollzy1"]
+console.log(spliceF2); 		//["lolzzy2", "lollzzy3"] 
+
+// ..........................................................
+
+// SORT .....................................................
+
+var numbers = [4, 8, 15, 16, 23, 42]; 
+
+var numbersSort = numbers.sort(); 
+
+console.log(numbersSort);  // [15, 16, 23, 4, 42, 8]
+
+// console.log(numbers);  	
+// console.log(numbersSort);  
+
+var sortNum = function(a, b) {
+	// console.log('a[' + a + '] - b[' + b + '] = ' + (a - b)); 
+	// console.log('--------');
+	return a - b; 
+} 
+
+// as you can see for below only numbers with negative results will return the correct order of the array 
+
+// a[15] - b[16] = -1   
+// --------
+// a[16] - b[23] = -7   
+// --------
+// a[23] - b[4] = 19	
+// --------
+// a[16] - b[4] = 12	
+// --------
+// a[15] - b[4] = 11
+// --------
+// a[23] - b[42] = -19
+// --------
+// a[42] - b[8] = 34
+// --------
+// a[23] - b[8] = 15
+// --------
+// a[16] - b[8] = 8
+// --------
+// a[15] - b[8] = 7
+// --------
+// a[4] - b[8] = -4
+// --------
+
+var numbersSort2 = numbers.sort(sortNum);
+
+console.log(numbersSort2);  
+
+var numbersAndLetters = ['aa', 16, 'zz', 'bb', 'a', 4, 8, 15, 23, 42];
+
+var sortNumAndLetter = function(a, b) {
+
+
+	if (a === b) {
+		return 0; 
+	}
+
+	// if both strings or numbers then return 
+	if (typeof a === typeof b) {
+		return a < b ? -1 : 1; 
+	}
+	return typeof a < typeof b ? -1 : 1; 
+}
+
+var sortedNumLet = numbersAndLetters.sort(sortNumAndLetter); 
+
+console.log(sortedNumLet);  
+
+var by = function (name) {
+	return function (o, p) {
+		
+		var a, b; 
+
+		if (typeof o === 'object' && typeof p === 'object' && o && p) {
+
+			a = o[name];
+			b = p[name]; 
+
+			if (a === b) {
+				return 0; 
+			}
+
+			if (typeof a === typeof b) {
+				return a < b ? -1 : 1; 
+			}
+
+			return typeof a < typeof b ? -1 : 1; 
+
+		} else {
+
+			throw {
+				name: 'Error', 
+				message: 'Expected an object sorted by ' + name
+			};
+		}
+
+	}; 
+} 
+
+var s = [
+		{first: 'Joe', last: 'Besser'},
+		{first: 'Moe',last: 'Howard'},
+		{first: 'Joe',last: 'aDeRita'},
+		{first: 'Shemp', last: 'Howard'},
+		{first: 'Larry', last: 'Fine'},
+		{first: 'Curly', last: 'Howard'}
+    ]; 
+
+var sorted = s.sort(by('first'));
+
+console.dir(sorted);
+
+
+// .......................................................... 
+
+// ----------------------------------------------------------
+// LEFT OFF ------------------------------------------------- 
+// ----------------------------------------------------------
+
+// ----------------------------------------------------------
+// CODE EXPLANATION ----------------------------------------- 
+// ----------------------------------------------------------
+
+// ----------------------------------------------------------
+// CONCEPT EXPLANATION --------------------------------------
+// ----------------------------------------------------------  
+
+// SORT
+
+// If compareFunction(a, b) is less than 0, sort a to a lower index than b, i.e. a comes first.
+// If compareFunction(a, b) returns 0, leave a and b unchanged with respect to each other, but sorted with respect to all different elements. Note: the ECMAscript standard does not guarantee this behaviour, and thus not all browsers (e.g. Mozilla versions dating back to at least 2003) respect this.
+// If compareFunction(a, b) is greater than 0, sort b to a lower index than a.
+// compareFunction(a, b) must always return the same value when given a specific pair of elements a and b as its two arguments. If inconsistent results are returned then the sort order is undefined.
+
+// **********************************************************
+// STUFF TO DEAL WITH ***************************************
+// **********************************************************
+
+</script> 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
