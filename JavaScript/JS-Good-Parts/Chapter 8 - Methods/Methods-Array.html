@@ -223,14 +223,17 @@ var by = function (name) {
 			a = o[name];
 			b = p[name]; 
 
+			// finds if same 
 			if (a === b) {
 				return 0; 
 			}
 
+			// sorts numbers or strings within each other
 			if (typeof a === typeof b) {
 				return a < b ? -1 : 1; 
 			}
 
+			// sorts numbers from strings 
 			return typeof a < typeof b ? -1 : 1; 
 
 		} else {
