@@ -289,7 +289,7 @@ var by2 = function (name, minor) {
 				return a < b ? -1 : 1; 
 			}
 			return typeof a < typeof b ? -1 : 1; 
-			
+
 		} else {
 
 			throw {
@@ -305,6 +305,17 @@ var sorted2 = s2.sort(by2('last', by2('first')));
 
 console.dir(sorted2);
 
+// SPLICE ...................................................
+
+var aa1 = ['a', 'b', 'c']; 
+var r = aa1.splice(1, 1, 'ache', 'bug'); 
+
+console.dir(aa1); 
+console.dir(r);  
+
+// .......................................................... 
+
+// UNSHIFT ..................................................
 
 // .......................................................... 
 
