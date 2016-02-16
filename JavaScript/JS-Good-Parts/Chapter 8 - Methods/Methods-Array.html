@@ -99,20 +99,27 @@ console.log(e); 	  //["lollzy1", "lolzzy2"]
 // PUSH .....................................................
 
 Array.prototype.push_dc = function() {
-	this.slice.apply(
-		this, 
-		[this.length, 0]
-			.concat(Array.prototype.slice.apply(arguments))); 
-	return this.length; 
+
+	Array.prototype.splice.apply( 										// use the splice function
+		this, 															// on the contextual object (array)
+																		// [splice args start]
+		[this.length, 0]												// [start of splice, end of splice]
+			.concat(Array.prototype.slice.apply(arguments))); 			// concatenate the arguments to the array 
+							
+	return this.length; 				
 } 
 
 var f = ['lollzy1', 'lolzzy2', 'lollzzy3']; 
 var g = ['a', 'x', 'n'];
 var h = ['a', 'b', 'c']; 
 
-var a1 = h.push_dc(f, g, h, false, 'cunt'); // 8
+var a1 = h.push_dc(f, g, h, false, 'lol'); // 8
 
+console.log('push functions ----------- ');  
 console.log(h);  // ["a", "b", "c", Array[3], Array[3], Array[8], false, "cunt"] 
+console.log(a1); 
+console.log('-------------------------- ');  
+
 
 // ..........................................................
 
@@ -316,6 +323,20 @@ console.dir(r);
 // .......................................................... 
 
 // UNSHIFT ..................................................
+
+Array.prototype.unshift_dc = function () {
+	this.splice.apply(this, [0, 0].concat(Array.prototype.slice.apply(arguments)));
+	return this.length 
+} 
+
+var aa2 = ['a', 'b', 'c']; 
+var r2 = aa2.unshift_dc('?', '@'); 
+
+console.dir(aa2);
+console.dir(r2); 
+
+
+
 
 // .......................................................... 
 
