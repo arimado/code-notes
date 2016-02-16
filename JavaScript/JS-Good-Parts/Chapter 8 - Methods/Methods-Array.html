@@ -60,6 +60,8 @@ Function.method('inherits', function (Parent) {
 // CODE  ---------------------------------------------------- 
 // ---------------------------------------------------------- 
 
+// ARRAYS ---------------------------------------------------
+
 // CONCAT ...................................................
 
 var a = ['a', 'b', 'c']; 
@@ -105,7 +107,7 @@ Array.prototype.push_dc = function() {
 																		// [splice args start]
 		[this.length, 0]												// [start of splice, end of splice]
 			.concat(Array.prototype.slice.apply(arguments))); 			// concatenate the arguments to the array 
-							
+
 	return this.length; 				
 } 
 
@@ -335,10 +337,9 @@ var r2 = aa2.unshift_dc('?', '@');
 console.dir(aa2);
 console.dir(r2); 
 
-
-
-
 // .......................................................... 
+
+// Functions ------------------------------------------------
 
 // ----------------------------------------------------------
 // LEFT OFF ------------------------------------------------- 
