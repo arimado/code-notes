@@ -1,0 +1,156 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body> 
+
+<script> 
+
+// LIBRARY --------------------------------------
+
+// method becomes an object of the function ibject
+Function.prototype.method = function (name, func) {
+	this.prototype[name] = func; 
+	return this; 
+}; 
+
+Function.prototype.loop = function (iterate) {
+	console.log(this); 
+	for(i = 0; i < iterate; i++) {
+
+	}
+}; 
+
+var add = function (a, b) {
+	return a + b; 
+}; 
+
+var memoizer = function (memo, fundemental) {
+	var shell = function (n) {
+		var result = memo[n];
+		if (typeof result !== 'number') {
+			result = fundemental(shell, n);
+			memo[n] = result; 
+		}
+		return result; 
+	}; 
+	return shell; 
+}; 
+
+Function.method('new', function () {
+	var that = Object.create(this.prototype); 
+	var other = this.apply(that, arguments);  
+	return (typeof other === 'object' && other) || that; 
+}); 
+
+Function.method('inherits', function (Parent) {
+	this.prototype = Parent.new(); // DC 
+	// this.prototype = new Parent(); // JS
+	return this;
+}); 
+
+// **********************************************************
+// SCRIBBLE CODE ********************************************
+// **********************************************************
+
+// ----------------------------------------------------------
+// CODE  ---------------------------------------------------- 
+// ---------------------------------------------------------- 
+
+Function.method('bind_dc', function (that) {
+
+	var method = this; 
+
+	var slice = Array.prototype.slice; 
+	var args = slice.apply(arguments, [1]); // basically calling arguments.slice(1) 
+											// 1 is in an array because apply takes arguments 
+												
+	console.log									
+
+	return function () {
+
+		return method.apply(that, args.concat(slice.apply(arguments, [0]))); 
+	};  
+
+});
+
+var x = function () {
+	return this.value; 
+}.bind_dc({value: 666});
+
+console.log(x()); 
+
+
+
+// Functions ------------------------------------------------
+
+// ----------------------------------------------------------
+// LEFT OFF ------------------------------------------------- 
+// ----------------------------------------------------------
+
+// ----------------------------------------------------------
+// CODE EXPLANATION ----------------------------------------- 
+// ----------------------------------------------------------
+
+// ----------------------------------------------------------
+// CONCEPT EXPLANATION --------------------------------------
+// ----------------------------------------------------------  
+
+// **********************************************************
+// STUFF TO DEAL WITH ***************************************
+// **********************************************************
+
+</script> 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
