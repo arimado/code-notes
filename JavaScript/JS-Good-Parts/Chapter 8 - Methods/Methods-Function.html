@@ -60,32 +60,43 @@ Function.method('inherits', function (Parent) {
 // CODE  ---------------------------------------------------- 
 // ---------------------------------------------------------- 
 
-Function.method('bind_dc', function (that) {
+Function.prototype.bind_dc = function (that) {
 
 	var method = this; 
-
 	var slice = Array.prototype.slice; 
-	var args = slice.apply(arguments, [1]); // basically calling arguments.slice(1) 
-											// 1 is in an array because apply takes arguments 
-												
-	console.log									
+	var args = slice.apply(arguments, [1]); // basically calling arguments.slice(1, array.length) 
+											// 1 is in an array because apply takes arguments
+											// the purpose of args is to turn arguments (an array-like object) into an array 
 
-	return function () {
+	console.log(that);  					// Object {value: 666}
+	console.log(method); 					// function () { return this.value; }
+	console.log(args);						// {value: 666}.slice(1); returns an empty array because startSliceParam === array.length 
+											// maybe because
 
-		return method.apply(that, args.concat(slice.apply(arguments, [0]))); 
-	};  
+	return function () { 
+		return method.apply(
+			that, 											// conextual object is now: {value: 666}
+				args.concat(slice.apply(arguments, [0])));  // arguments is 
+															// arguments from 
+	}; 
+}
 
-});
+var numberbrah = 666;
 
 var x = function () {
 	return this.value; 
-}.bind_dc({value: 666});
+}.bind_dc({value: 666}, {value: 61236}, {value: 66121136});
 
-console.log(x()); 
+console.log(x());
 
 
+// **********************************************************
+// QUESTIONS ************************************************
+// **********************************************************
 
-// Functions ------------------------------------------------
+// on line 67 
+
+
 
 // ----------------------------------------------------------
 // LEFT OFF ------------------------------------------------- 
@@ -99,9 +110,6 @@ console.log(x());
 // CONCEPT EXPLANATION --------------------------------------
 // ----------------------------------------------------------  
 
-// **********************************************************
-// STUFF TO DEAL WITH ***************************************
-// **********************************************************
 
 </script> 
 </body>
