@@ -90,8 +90,7 @@ Function.prototype.bind_ja = function (that) {
 
 	return function () {
 		return method.apply(that, args.concat(slice.apply(arguments, [0]))); 
-	}
-
+	} 
 }
 
 var numberbrah = 666;
