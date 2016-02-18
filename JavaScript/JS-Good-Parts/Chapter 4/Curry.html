@@ -16,32 +16,47 @@ Function.prototype.method = function (name, func) {
 	return this; 
 };
 
-var add = function (a, b) {
-	return a + b; 
-}; 
-
 // *********************************************
 // SCRIBBLE CODE *******************************
 // *********************************************
 
 // ----------------------------------------------
 
-Function.prototype.curry = function () {
+var add = function (a, b) {
+	return a + b; 
+}; 
+
+Function.prototype.curry_ja = function () {
 	
+	var slice = Array.prototype.slice; 
+	var args = slice.apply(arguments); //This gets all the arguments passed in it; 
+	var that = this; // gets the contextual object 
+
+	return function() {
+		console.log(arguments); 
+		return that.apply(null, args.concat(slice.apply(arguments)));  
+	} 
+}
+
+Function.prototype.curry = function () {
 	var slice = Array.prototype.slice; // get the slice function from the array 
 	var args = slice.apply(arguments); 
 	console.log(args);
-	var that = this; 
+	var that = this; 	
 	return function() { 
 		return that.apply(null, args.concat(slice.apply(arguments)));   
 	};
 } 
 
-var add1 = add.curry(1); 
+var add1 = add.curry_ja(1); 
 
-console.log(add.curry(1));  	// Result: returns the closure function 
-console.log(add.curry(1)(6));  	// Result: returns the the return value of the closure function
+// console.log(add.curry(1));  	// Result: returns the closure function 
+// console.log(add.curry(1)(6));  	// Result: returns the the return value of the closure function
 console.log(add1(6));  	   		// Result: returns the the return value of the closure function 
+
+
+
+
 
 // ----------------------------------------------------------
 // CODE EXPLANATION ----------------------------------------- 
@@ -71,7 +86,7 @@ console.log(add1(6));  	   		// Result: returns the the return value of the clos
 // 	return number += num; 
 // }
 // **********
-// TO DO: prove why add1 can't take multiple args  ||| SOLVED - Function we call it on (add) only takes 2 
+// TO DO: prove why add1 can't take multiple args  ||| SOLVED - Function we call it on (add) only takes 2 (1 + the other)
 // ********** 
 // **********
 // CODE: this is the function that douggie crock uses to make function methods but i'm
