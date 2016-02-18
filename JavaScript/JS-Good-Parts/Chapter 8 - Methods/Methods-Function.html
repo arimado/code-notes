@@ -86,10 +86,10 @@ Function.prototype.bind_ja = function (that) {
 
 	var method = this; 
 	var slice = Array.prototype.slice; 
-	var args = slice.apply(arguments, [1]) // skips the first argument? 
+	var args = slice.apply(arguments) // skips the first argument? 
 
 	return function () {
-		return method.apply(that, args.concat(slice.apply(arguments, [0]))); 
+		return method.apply(that, args.concat(slice.apply(arguments))); 
 	} 
 }
 
