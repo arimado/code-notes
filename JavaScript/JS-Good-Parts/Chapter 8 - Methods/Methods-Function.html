@@ -65,7 +65,7 @@ Function.prototype.bind_dc = function (that) {
 	var method = this; 
 	var slice = Array.prototype.slice; 
 	var args = slice.apply(arguments, [1]); // basically calling arguments.slice(1, array.length) 
-											// 1 is in an array because apply takes arguments
+											// 1 is in an array because apply takes arguments 
 											// the purpose of args is to turn arguments (an array-like object) into an array 
 
 	console.log(that);  					// Object {value: 666}
@@ -79,7 +79,8 @@ Function.prototype.bind_dc = function (that) {
 				args.concat(slice.apply(arguments, [0])));  // arguments is 
 															// arguments from 
 	}; 
-}
+
+} 
 
 var numberbrah = 666;
 

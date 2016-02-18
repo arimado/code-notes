@@ -28,10 +28,10 @@ var add = function (a, b) {
 
 Function.prototype.curry = function () {
 	
-	var slice = Array.prototype.slice;
+	var slice = Array.prototype.slice; // get the slice function from the array 
 	var args = slice.apply(arguments); 
+	console.log(args);
 	var that = this; 
-
 	return function() { 
 		return that.apply(null, args.concat(slice.apply(arguments)));   
 	};
