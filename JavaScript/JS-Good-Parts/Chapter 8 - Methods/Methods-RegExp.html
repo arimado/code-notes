@@ -71,22 +71,46 @@ Function.prototype.bind_dc = function (that) {
 // CODE  ---------------------------------------------------- 
 // ---------------------------------------------------------- 
 
-// hasOwnProperty() 
-// Does not check prototype chain. 
+String.prototype.entityify = function () {
+	var character = {
+		'<' : '&alt;', 
+		'>'	: '&gt;', 
+		'&'	: '&amp;', 
+		'"'	: '&quot;' 
+	};
+	return function () {
+		return this.replace(/[<>&"]/g, function(c) {
+			return character[c]; 
+		}); 
+	}
+}();
 
-var a = {member: true}; 
-var b = Object.create(a); 
-var t = a.hasOwnProperty('member'); 
-var u = b.hasOwnProperty('member'); 
-var v = b.member; 
+var text = '<html><body bgcolor=linen><p>' + 'This is <b>bold<\/b>!<\/p><\/body><\/html>';
 
-console.log(t);
-console.log(u);
-console.log(v);  
+var tags = /[^<>]+|<(\/?)([A-Za-z]+)([^<>]*)>/g;
+var a, i; 
+
+
+
+while((a = tags.exec(text))) { 			// keep executing the below code while a is an array of values
+										// everytime excec() is called regex.lastItem is updated
+										// regex will match tags then produce an array 
+
+	for (i = 0; i < a.length; i += 1) { 
+		console.log(('[' + i + '] ' + a[i])); 
+	} 
+	console.log('-----'); 
+}; 
+
+console.dir(a); 
+
 
 // **********************************************************
 // QUESTIONS ************************************************
 // **********************************************************
+
+// 1. why doesn't entiyify work?
+
 
 // ----------------------------------------------------------
 // LEFT OFF ------------------------------------------------- 
@@ -95,6 +119,8 @@ console.log(v);
 // ----------------------------------------------------------
 // CODE EXPLANATION ----------------------------------------- 
 // ----------------------------------------------------------
+
+
 
 // ----------------------------------------------------------
 // CONCEPT EXPLANATION --------------------------------------
