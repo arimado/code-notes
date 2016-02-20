@@ -63,17 +63,6 @@ Function.prototype.bind_dc = function (that) {
 	} 
 }
 
-// **********************************************************
-// SCRIBBLE CODE ********************************************
-// **********************************************************
-
-// ----------------------------------------------------------
-// CODE  ---------------------------------------------------- 
-// ---------------------------------------------------------- 
-// ..........................................................
-
-// regex.exec() .............................................
-
 String.prototype.entityify = function () {
 	var character = {
 		'<' : '&alt;', 
@@ -88,37 +77,86 @@ String.prototype.entityify = function () {
 	}
 }();
 
-var text = '<html><body bgcolor=linen><p>' + 'This is <b>bold<\/b>!<\/p><\/body><\/html>';
+// **********************************************************
+// SCRIBBLE CODE ********************************************
+// **********************************************************
 
-var tags = /[^<>]+|<(\/?)([A-Za-z]+)([^<>]*)>/g;
-var a, i; 
+// ----------------------------------------------------------
+// CODE  ---------------------------------------------------- 
+// ---------------------------------------------------------- 
 
+// string.charAt(pos); ......................................
 
-while((a = tags.exec(text))) { 			// keep executing the below code while a is an array of values
-										// everytime excec() is called regex.lastIndex is updated
-										// regex will match tags then produce an array 
-
-	// for (i = 0; i < a.length; i += 1) { 
-	// 	console.log(('[' + i + '] ' + a[i])); 
-	// } 
-	// console.log('-----'); 
-}; 
-
-// console.dir(a); 
-
-// ..........................................................
-
-// regex.test() .............................................
-
-RegExp.prototype.test_dc = function (string) {
-	return this.exec(string) !== null; 
+String.prototype.charAt_dc = function (pos) {
+	return this.slice(pos, pos + 1); 
 }
 
-var b = /&.+;/.test_dc('frank &amp; beans'); 
+var name = 'Curly'; 
+console.log(name.charAt(0));
+console.log(name.charAt_dc(2));
+console.log('----------------')
+// ..........................................................
 
-console.log(b);
+// string.charCodeAt(pos);  .................................
+
+console.log(name.charCodeAt(2));
+console.log('----------------')
+// ..........................................................
+
+// string.concat(string...);  ...............................
 
 // ..........................................................
+
+// string.indexOf(searchString, position); ..................
+
+var text = 'Mississipi';
+
+console.log(text.indexOf('ss'));
+console.log(text.indexOf('ss', 3)); 
+console.log(text.indexOf('ss', 10)); 
+
+console.log('----------------'); 
+// ..........................................................
+
+// string.lastIndexOf(searchString, position);  .............
+
+console.log(text.lastIndexOf('ss'));
+console.log(text.lastIndexOf('ss', 3)); 
+console.log(text.lastIndexOf('ss', 10)); 
+
+
+console.log('----------------')
+// ..........................................................
+
+// string.localeCompare(that);  .............................
+
+
+
+
+console.log('----------------')
+// ..........................................................
+
+// string.match(regexp);  ...................................
+console.log('----------------')
+// ..........................................................
+
+// string.replace(searchValue, replaceValue);  ..............
+console.log('----------------')
+// ..........................................................
+
+// string.search(regexp);  ..................................
+console.log('----------------')
+// ..........................................................
+
+// string.slice(start, end);  ...............................
+console.log('----------------')
+// ..........................................................
+
+// string.split(seperator, limit); ..........................
+console.log('----------------')
+// ..........................................................
+
+
 
 // **********************************************************
 // QUESTIONS ************************************************
