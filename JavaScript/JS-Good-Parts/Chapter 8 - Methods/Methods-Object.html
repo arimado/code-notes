@@ -1,0 +1,154 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body> 
+
+<script> 
+
+// LIBRARY --------------------------------------
+
+// method becomes an object of the function ibject
+Function.prototype.method = function (name, func) {
+	this.prototype[name] = func; 
+	return this; 
+}; 
+
+Function.prototype.loop = function (iterate) {
+	console.log(this); 
+	for(i = 0; i < iterate; i++) {
+
+	}
+}; 
+
+var add = function (a, b) {
+	return a + b; 
+}; 
+
+var memoizer = function (memo, fundemental) {
+	var shell = function (n) {
+		var result = memo[n];
+		if (typeof result !== 'number') {
+			result = fundemental(shell, n);
+			memo[n] = result; 
+		}
+		return result; 
+	}; 
+	return shell; 
+}; 
+
+Function.method('new', function () {
+	var that = Object.create(this.prototype); 
+	var other = this.apply(that, arguments);  
+	return (typeof other === 'object' && other) || that; 
+}); 
+
+Function.method('inherits', function (Parent) {
+	this.prototype = Parent.new(); // DC 
+	// this.prototype = new Parent(); // JS
+	return this;
+}); 
+
+Function.prototype.bind_dc = function (that) {
+
+	var method = this; 
+	var slice = Array.prototype.slice; 
+	var args = slice.apply(arguments, [1]) // skips the first argument? 
+
+	return function () {
+		return method.apply(that, args.concat(slice.apply(arguments, [0]))); 
+	} 
+}
+
+// **********************************************************
+// SCRIBBLE CODE ********************************************
+// **********************************************************
+
+// ----------------------------------------------------------
+// CODE  ---------------------------------------------------- 
+// ---------------------------------------------------------- 
+
+// hasOwnProperty() 
+// Does not check prototype chain. 
+
+var a = {member: true}; 
+var b = Object.create(a); 
+var t = a.hasOwnProperty('member'); 
+var u = b.hasOwnProperty('member'); 
+var v = b.member; 
+
+console.log(t);
+console.log(u);
+console.log(v);
+
+// **********************************************************
+// QUESTIONS ************************************************
+// **********************************************************
+
+// ----------------------------------------------------------
+// LEFT OFF ------------------------------------------------- 
+// ----------------------------------------------------------
+
+// ----------------------------------------------------------
+// CODE EXPLANATION ----------------------------------------- 
+// ----------------------------------------------------------
+
+// ----------------------------------------------------------
+// CONCEPT EXPLANATION --------------------------------------
+// ----------------------------------------------------------  
+
+
+</script> 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
