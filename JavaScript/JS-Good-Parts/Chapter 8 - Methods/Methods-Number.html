@@ -52,6 +52,17 @@ Function.method('inherits', function (Parent) {
 	return this;
 }); 
 
+Function.prototype.bind_dc = function (that) {
+
+	var method = this; 
+	var slice = Array.prototype.slice; 
+	var args = slice.apply(arguments, [1]) // skips the first argument? 
+
+	return function () {
+		return method.apply(that, args.concat(slice.apply(arguments, [0]))); 
+	} 
+}
+
 // **********************************************************
 // SCRIBBLE CODE ********************************************
 // **********************************************************
@@ -60,54 +71,24 @@ Function.method('inherits', function (Parent) {
 // CODE  ---------------------------------------------------- 
 // ---------------------------------------------------------- 
 
-// Function.prototype.bind_dc = function (that) {
+// toExponential() ..........................................
 
-// 	var method = this; 
-// 	var slice = Array.prototype.slice; 
-// 	var args = slice.apply(arguments, [1]); // basically calling arguments.slice(1, array.length) 
-// 											// 1 is in an array because apply takes arguments 
-// 											// the purpose of args is to turn arguments (an array-like object) into an array 
+// ..........................................................
 
-// 	console.log(that);  					// Object {value: 666}
-// 	console.log(method); 					// function () { return this.value; }
-// 	console.log(args);						// {value: 666}.slice(1); returns an empty array because startSliceParam === array.length 
-// 											// maybe because
+// number.toFixed() .........................................
 
-// 	return function () { 
-// 		return method.apply(
-// 			that, 											// conextual object is now: {value: 666}
-// 				args.concat(slice.apply(arguments, [0])));  // arguments is 
-// 															// arguments from 
-// 	}; 
-// } 
+// ..........................................................
 
-Function.prototype.bind_ja = function (that) {
+// number.toPrecision .......................................
 
-	var method = this; 
-	var slice = Array.prototype.slice; 
-	var args = slice.apply(arguments) // skips the first argument? 
+// ..........................................................
 
-	return function () {
-		return method.apply(that, args.concat(slice.apply(arguments))); 
-	} 
-}
-
-var numberbrah = 666;
-
-var x = function () {
-	return this.value; 
-}.bind_ja({value: 666}); 
-
-console.log(x());
+// number.toString() ........................................
 
 
 // **********************************************************
 // QUESTIONS ************************************************
 // **********************************************************
-
-// on line 67 
-
-
 
 // ----------------------------------------------------------
 // LEFT OFF ------------------------------------------------- 
