@@ -70,6 +70,9 @@ Function.prototype.bind_dc = function (that) {
 // ----------------------------------------------------------
 // CODE  ---------------------------------------------------- 
 // ---------------------------------------------------------- 
+// ..........................................................
+
+// regex.exec() .............................................
 
 String.prototype.entityify = function () {
 	var character = {
@@ -91,19 +94,33 @@ var tags = /[^<>]+|<(\/?)([A-Za-z]+)([^<>]*)>/g;
 var a, i; 
 
 
-
 while((a = tags.exec(text))) { 			// keep executing the below code while a is an array of values
 										// everytime excec() is called regex.lastIndex is updated
 										// regex will match tags then produce an array 
 
-	for (i = 0; i < a.length; i += 1) { 
-		console.log(('[' + i + '] ' + a[i])); 
-	} 
-	console.log('-----'); 
+	// for (i = 0; i < a.length; i += 1) { 
+	// 	console.log(('[' + i + '] ' + a[i])); 
+	// } 
+	// console.log('-----'); 
 }; 
 
-console.dir(a); 
+// console.dir(a); 
 
+// ..........................................................
+
+// regex.test() .............................................
+
+RegExp.prototype.test_dc = function (string) {
+	return this.exec(string) !== null; 
+}
+
+var b = /&.+;/.test_dc('frank &amp; beans'); 
+
+console.log(b);
+
+
+
+// ..........................................................
 
 // **********************************************************
 // QUESTIONS ************************************************
