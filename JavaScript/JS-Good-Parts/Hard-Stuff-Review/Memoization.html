@@ -1,0 +1,192 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body> 
+
+<script> 
+
+// LIBRARY --------------------------------------
+
+Function.prototype.method = function (name, func) {
+	this.prototype[name] = func; 
+	return this; 
+};
+
+Function.prototype.loop = function (iterate) {
+	console.log(this); 
+	for(i = 0; i < iterate; i++) {
+
+	}
+}
+
+var add = function (a, b) {
+	return a + b; 
+}; 
+
+
+
+// **********************************************************
+// SCRIBBLE CODE ********************************************
+// **********************************************************
+
+// ----------------------------------------------------------
+// CODE  ---------------------------------------------------- 
+// ----------------------------------------------------------
+
+
+
+var slowFibonacci = function (n) { 
+	if(n < 2) {
+		return n; 
+	} else {
+		console.log('fib');
+		return slowFibonacci(n - 1) + slowFibonacci(n - 2); 
+	}
+}; 
+
+var fibonacci = function () {
+	var memo = [0, 1]; 
+
+	var fib = function (n) {
+		console.log('fib')
+		var result = memo[n]; 				// these two lines are key to keeping the fib functions from 
+		if (typeof result !== 'number') {  	// working too hard 	
+			result = fib(n - 1) + fib(n - 2); 
+			memo[n] = result; 
+		} else {
+			console.log('fib n-' + result + ' is already in the array!');
+		}
+		console.log(memo);
+		console.log(result); 
+		return result; 
+	}
+		return fib; 
+}();
+
+// for (var i = 0; i <= 6; i++) {
+// 	fibonacci(i);
+// 	// console.log(i + ' : ' + fibonacci(i)); 
+// }; 
+
+// for (var i = 0; i <= 10; i++) {
+// 	console.log(i + ' : ' + slowFibonacci(i)); 
+// }
+
+var memoizer = function (memo, fundemental) {
+	var shell = function (n) {
+		var result = memo[n];
+		if (typeof result !== 'number') {
+			result = fundemental(shell, n);
+			memo[n] = result; 
+		}
+		return result; 
+	}; 
+	return shell; 
+}; 
+
+var memFibonacci = memoizer([0,1], function(shell, n) { 
+	return shell(n - 1) + shell(n - 2); 
+}); 
+
+for (var i = 0; i <= 10; i++) {
+	console.log(memFibonacci(i));
+};
+
+
+// ----------------------------------------------------------
+// CODE EXPLANATION ----------------------------------------- 
+// ----------------------------------------------------------
+
+// slowFibonacci 
+//	- exit recursion when n is less than 2 
+//	- how does it return the sum of numbers? 
+
+// fibonacci [Memoized]
+// 1. Create private memoized results array 
+// 2. check to see if the nth fib number is in the array 
+//		- this needs to happen because 
+// 			- in the recursive fib function it returns fib 
+//			  numbers that have already been worked out 
+//				- ie. when it gets to the lower n values then 
+//				   it will stop executing as one of the the 
+//				   already exist in the memo array
+//				- a high number passed into the fib function 
+//				  would mean there will be alot of trees tyring
+//				  to execute lower values 
+
+
+// memFibonacci [via memoizer]
+// 1. declare memFibonacci funciton bia invoking memoizer and passing the memo array and fundenmental function
+// 2. the shell function is the containing function to be used as the filter
+// 3. fundemental is the function to be executed 
+
+// ----------------------------------------------------------
+// CONCEPT EXPLANATION --------------------------------------
+// ----------------------------------------------------------
+
+// Memoization is basically letting a function 'cache' returned
+// values in an effort to reduce executions. 
+
+// **********************************************************
+// STUFF TO DEAL WITH ***************************************
+// ********************************************************** 
+
+
+
+
+
+</script> 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

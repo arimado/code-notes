@@ -1,0 +1,160 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body> 
+
+<script> 
+
+// LIBRARY --------------------------------------
+
+Function.prototype.method = function (name, func) {
+	this.prototype[name] = func; 
+	return this; 
+};
+
+// *********************************************
+// SCRIBBLE CODE *******************************
+// *********************************************
+
+// ----------------------------------------------
+
+var add = function (a, b) {
+	return a + b; 
+}; 
+
+Function.prototype.curry_ja = function () {
+	
+	var slice = Array.prototype.slice; 
+	var args = slice.apply(arguments); //This gets all the arguments passed in it; 
+	var that = this; // gets the contextual object 
+
+	return function() {
+		console.log(arguments); 
+		return that.apply(null, args.concat(slice.apply(arguments)));  
+	} 
+}
+
+Function.prototype.curry = function () {
+	var slice = Array.prototype.slice; // get the slice function from the array 
+	var args = slice.apply(arguments); 
+	console.log(args);
+	var that = this; 	
+	return function() { 
+		return that.apply(null, args.concat(slice.apply(arguments)));   
+	};
+} 
+
+var add1 = add.curry_ja(1); 
+
+// console.log(add.curry(1));  	// Result: returns the closure function 
+// console.log(add.curry(1)(6));  	// Result: returns the the return value of the closure function
+console.log(add1(6));  	   		// Result: returns the the return value of the closure function 
+
+
+
+
+
+// ----------------------------------------------------------
+// CODE EXPLANATION ----------------------------------------- 
+// ----------------------------------------------------------
+
+// 1. store Array.protoype.slice for readable use in object to array converions
+// 2. we turn the initial argument into an array for use in concatination later 
+// 3. preserve contextual object in this for local functions 
+// 4. create a closure that concatentates the arguments of add.curry(1) and add1(6) and returns the value 
+
+// ----------------------------------------------------------
+// CONCEPT EXPLANATION --------------------------------------
+// ----------------------------------------------------------
+
+// Currying is essentially the creation of a new function based on an old function except with a static/unchanging argument. 
+// When calling this new function, this static/unchanging argument will be concatenated to your parameters in the invocation.
+
+// **********************************************************
+// STUFF TO DEAL WITH ***************************************
+// **********************************************************
+
+// **********
+// TO DO: prove why the below add function doesn't work with the curry method  
+// **********
+// var add = function(num) {
+// 	var number = 0; 
+// 	return number += num; 
+// }
+// **********
+// TO DO: prove why add1 can't take multiple args  ||| SOLVED - Function we call it on (add) only takes 2 (1 + the other)
+// ********** 
+// **********
+// CODE: this is the function that douggie crock uses to make function methods but i'm
+// using my own above because fuck the crock.  
+// **********
+// Function.method('curry', function () {
+// 	var slice = Array.prototype.slice;
+// 	console.log(slice); 
+// 	var args = slice.apply(arguments);
+// 	console.log(args);
+// 	var that = this;
+// 	console.log(that); 
+
+// 	return function() {
+// 		return that.apply(null, args.concat(slice.apply(arguments))); 
+// 	};
+// }); 
+
+
+
+</script> 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

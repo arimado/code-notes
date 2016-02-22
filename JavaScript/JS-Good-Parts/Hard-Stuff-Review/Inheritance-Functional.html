@@ -1,0 +1,297 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body> 
+
+<script> 
+
+// LIBRARY --------------------------------------
+
+// method becomes an object of the function ibject
+Function.prototype.method = function (name, func) {
+	this.prototype[name] = func; 
+	return this; 
+};
+
+Function.prototype.loop = function (iterate) {
+	console.log(this); 
+	for(i = 0; i < iterate; i++) {
+
+	}
+}; 
+
+var add = function (a, b) {
+	return a + b; 
+}; 
+
+var memoizer = function (memo, fundemental) {
+	var shell = function (n) {
+		var result = memo[n];
+		if (typeof result !== 'number') {
+			result = fundemental(shell, n);
+			memo[n] = result; 
+		}
+		return result; 
+	}; 
+	return shell; 
+}; 
+
+Function.method('new', function () {
+	var that = Object.create(this.prototype); 
+	var other = this.apply(that, arguments);  
+	return (typeof other === 'object' && other) || that; 
+}); 
+
+Function.method('inherits', function (Parent) {
+	this.prototype = Parent.new(); // DC 
+	// this.prototype = new Parent(); // JS
+	return this;
+}); 
+
+// **********************************************************
+// SCRIBBLE CODE ********************************************
+// **********************************************************
+
+
+// ----------------------------------------------------------
+// CODE  ---------------------------------------------------- 
+// ---------------------------------------------------------- 
+
+
+// Functional Pattern Example -------------------------------
+
+var constructor = function (spec, my) {
+	var that; 
+
+	// private instance variables and methods for the object 
+	// this is done my declaring variables 
+
+	var methodical = function () {
+		//code here 
+	} 
+
+	my = my || {}; 	// add your shared secrets to the my object
+					// this is shared because this is passed from the childeren to the parent
+					// my.member = value; 
+
+	that = {};  // this is where you create the object 
+				// this could have been made with 'new' or object.create(); 
+
+	that.methodical = methodical; 	//adding privileged methods this way insures all other functions in this scope has access to methodical(); 
+									//if the instance is fucked with methodical will continue to work 
+									//this is in contrast with definining it like this that.methodical = function(){}; 
+
+	return that; 
+}
+
+// -------------------------------------------------------
+
+// MAMMAL .......................
+
+var mammal = function(spec) {
+	
+	//private methods
+	var get_name = function() { return spec.name; }
+	var says = function() { return spec.saying || ''; }
+
+	// intialise new object 
+	var that = {};
+
+	//add private methods to new object 
+	that.get_name = get_name; 
+	that.says = says; 
+
+	//return object 
+	return that; 
+}
+
+console.log('myMammal -------------------------'); 
+
+var myMammal = mammal({name: 'Herb', saying: 'fuck you want'}); 
+console.dir(myMammal); 
+console.dir(myMammal.get_name());
+console.dir(myMammal.says());
+
+// CAT .......................
+
+var cat = function (spec) { // spec is paramater so you can pass it into the parent object 
+	
+	spec.saying = spec.saying || 'meow'; 
+
+	// woah this is like 2 levels of spec 
+	var that = mammal(spec); 
+
+	that.purr = function (n) {
+		var i, s = ''; 
+		for (i = 0; i < n; i++) {
+			if(s) {
+				s += '-'; 
+			}
+			s += 'r'; 
+		}
+		return s; 
+	}
+
+	that.get_name = function () {
+		return that.says() + ' ' + spec.name + ' ' + that.says();
+	}
+
+	return that;
+}; 
+
+console.log('Cat -------------------------'); 
+
+var myCat = cat({name: 'Barf-field'}); 
+
+console.dir(myCat);
+console.dir(myCat.says());
+console.dir(myCat.purr(5));
+console.dir(myCat.get_name()); 
+
+// LION .......................
+
+var lion = function (spec) {
+
+	spec.name = spec.name || 'LEROY DEFAULT JENKINS'; 
+	spec.saying = spec.saying || 'ROOAAAR';
+
+	var kill_man = function (name) {
+		return name + ' is mauled to death by ' + spec.name; 
+	}
+
+	var that = cat(spec); 
+
+	that.kill_man = kill_man; 
+
+	return that; 
+}
+
+// console.log('Lion -------------------------'); 
+
+// var myLion = lion({name: 'DEADPOOL', saying: 'lol so meta'}); 
+
+// console.dir(myLion);
+// console.dir(myLion.says());
+// console.dir(myLion.purr(5));
+// console.dir(myLion.get_name()); 
+
+// SUPERIOIR METHOD ......................................... 
+
+Object.method('superior', function (name){
+
+	var that = this; 
+
+	var method = that[name];
+
+	return function() {								
+		return method.apply(that, arguments); 		
+	}; 											 
+}); 
+
+var coolcat = function(spec) {
+	
+	var that = cat(spec); 
+
+	var super_get_name = that.superior('get_name'); 
+
+	that.get_name = function (n) {
+		return 'like ' + super_get_name() + ' baby'; 
+	}; 
+
+	return that; 
+};
+
+console.log('Coolcat -------------------------'); 
+
+var myCoolCat = coolcat({name: 'Bix'}); 
+
+console.dir(myCoolCat); 
+console.dir(myCoolCat.get_name());
+
+// ----------------------------------------------------------
+// LEFT OFF ------------------------------------------------- 
+// ----------------------------------------------------------
+
+// - not understanding why adding methods to Function and Object are interchageable 
+// - still not fully understanding apply 
+// - not udnerstanding that bloody superior making method
+// - the point of it was to make a method that you would call that would call itself despite of something 
+// i reckon
+// 1. give it another read
+// 2. consider doing apply() bind() call() [might not need to]
+
+// ----------------------------------------------------------
+// CODE EXPLANATION ----------------------------------------- 
+// ---------------------------------------------------------- 
+
+// ----------------------------------------------------------
+// CONCEPT EXPLANATION --------------------------------------
+// ----------------------------------------------------------  
+
+// **********************************************************
+// STUFF TO DEAL WITH ***************************************
+// **********************************************************
+
+// Investigate line 115-117 [SOLVED]
+
+// Why is Function.prototype and Object.protoype interchanchable
+// when defining the 'method' creator; 
+
+// Left off
+
+
+</script> 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
