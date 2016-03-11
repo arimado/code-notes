@@ -63,7 +63,7 @@ var myTest = function(item) {
 
 console.log(filter(ancestry, myTest)); 
 // Array.prototype.filter 
-console.log(ancestry.filter(myTest)); 
+console.log(ancestry.filter(myTest));  
 
 // -----------------
 // Reduce 
@@ -95,8 +95,34 @@ var reduce = function (array, f, start) {
 }; 
 
 console.log(reduce(ancestry, isNextYounger, 0)); 
-
 console.log(ancestry.reduce(ejs_younger)); 
+
+
+// -----------------
+// MAP -------------
+
+console.log(ancestry.map(function (index){
+    return index.born; 
+})); 
+
+var map = function (array, f) {
+    var mapped = []; 
+    for (var i = 0; i < array.length; i += 1) {
+        mapped.push(f(array[i])); 
+    }
+    return map 
+}
+
+console.log(ancestry.map(function(index){
+    return index.born;
+}))
+
+
+
+
+
+
+
 
 
 
