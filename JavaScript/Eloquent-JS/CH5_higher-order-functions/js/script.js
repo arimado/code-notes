@@ -72,7 +72,7 @@ console.log(ancestry.filter(myTest));
 
 var array5 = [1, 2, 3, 4, 5]; 
 
-var addNext = function (current, next) {
+var addCurrentNext = function (current, next) {
     return current + next; 
 };
 
@@ -111,7 +111,7 @@ var map = function (array, f) {
         mapped.push(f(array[i])); 
     }
     return map 
-}
+} 
 
 console.log(ancestry.map(function(index){
     return index.born;
@@ -119,8 +119,19 @@ console.log(ancestry.map(function(index){
 
 
 // -----------------
-// MAP -------------
+// COMPOSABILTIY 
 
+
+var average = function (array) {
+    return array.reduce(addCurrentNext) / array.length; 
+}
+
+var age = function (person) { return person.died - person.born; }; // MAP
+var male = function (person) { return person.sex === 'm'; }; // FILTER
+var female = function (person) { return person.sex === 'f'; }; // FILTER 
+
+console.log(average(ancestry.filter(male).map(age))); 
+console.log(average(ancestry.filter(female).map(age)))
 
 
 
