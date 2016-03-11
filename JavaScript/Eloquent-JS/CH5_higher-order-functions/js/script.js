@@ -77,23 +77,26 @@ var addNext = function (current, next) {
 };
 
 var isNextYounger = function (current, next) {
-    console.log('current ', current.born);
-    console.log('next ', next.born);
-    var born = current.born > next.born ? next.born : current.born;
-    console.log('born ', born); 
-    return born; 
+    var born = current.born > next.born ? next : current; 
+    return born;  
+}
+
+var ejs_younger = function (min, cur) {
+  if (cur.born < min.born) return cur;
+  else return min;
 }
 
 var reduce = function (array, f, start) { 
     var current = array[0];
     for (var i = start; i < array.length; i += 1) {
         current = f(current, array[i]); 
-        console.log(current);
     }
     return current; 
-};
+}; 
 
-console.log(reduce(ancestry, isNextYounger, 0));
+console.log(reduce(ancestry, isNextYounger, 0)); 
+
+console.log(ancestry.reduce(ejs_younger)); 
 
 
 
