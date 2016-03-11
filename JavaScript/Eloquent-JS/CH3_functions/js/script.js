@@ -42,84 +42,94 @@ var ANCESTRY_FILE = "[\n  " + [
 
 var ancestry = JSON.parse(ANCESTRY_FILE); 
 
-console.log(ancestry);
+// console.log(ancestry);
 
-// -----------------
-// It filters out the elements in an array that don’t pass a test.
+var threeByFive = function (target) {
+    function find (start, history) {
+       // something that finds the solution and prints 
+       // breaks out of the loop
+       // something that continues the branch 
 
-var filter = function (array, test) {
-    var passed = []; 
-    for(var i = 0; i < array.length; i += 1) {
-        if(test(array[i])) {
-            passed.push(array[i]); 
-        }
+       if (start === history) {
+            return history;  
+       } else if (start > null) {
+            return null; 
+       } else {
+        a
+       }
     }
-    return passed; 
 }
 
-var myTest = function(item) {
-    return item.born > 1825; 
-}
+// console.log(threeByFive(24));
 
-console.log(filter(ancestry, myTest)); 
-// Array.prototype.filter 
-console.log(ancestry.filter(myTest));  
-
-// -----------------
-// Reduce 
-
-// Find the most known ancient ancestor 
-
-var array5 = [1, 2, 3, 4, 5]; 
-
-var addNext = function (current, next) {
-    return current + next; 
-};
-
-var isNextYounger = function (current, next) {
-    var born = current.born > next.born ? next : current; 
-    return born;  
-}
-
-var ejs_younger = function (min, cur) {
-  if (cur.born < min.born) return cur;
-  else return min;
-}
-
-var reduce = function (array, f, start) { 
-    var current = array[0];
-    for (var i = start; i < array.length; i += 1) {
-        current = f(current, array[i]); 
-    }
-    return current; 
+var isEven = function (num) {
+    if (num === 0) {
+        return true;
+    } else if (num === 1 || num < 0) {
+        return false; 
+    } 
+    return isEven(num - 2); 
 }; 
 
-console.log(reduce(ancestry, isNextYounger, 0)); 
-console.log(ancestry.reduce(ejs_younger)); 
+console.log(isEven(4));
 
+// -----------------------------
 
-// -----------------
-// MAP -------------
-
-console.log(ancestry.map(function (index){
-    return index.born; 
-})); 
-
-var map = function (array, f) {
-    var mapped = []; 
-    for (var i = 0; i < array.length; i += 1) {
-        mapped.push(f(array[i])); 
+var countChar = function (string, char) {
+    var charCounter = 0; 
+    for (var i = 0; i < string.length; i += 1) {
+        var currentChar = string.charAt(i);
+        if (string.charAt(i) === char) charCounter += 1;  
     }
-    return map 
+    return charCounter; 
 }
 
-console.log(ancestry.map(function(index){
-    return index.born;
-})); 
+var countBs = function (string) {
+    return countChar(string, 'B');
+}
 
 
-// -----------------
-// MAP -------------
+// console.log(countChar('aaaaaBb', 'a'));
+
+console.log(countBs('aaaaBbBb'));
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
