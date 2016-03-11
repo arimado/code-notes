@@ -65,5 +65,37 @@ console.log(filter(ancestry, myTest));
 // Array.prototype.filter 
 console.log(ancestry.filter(myTest)); 
 
+// -----------------
+// Reduce 
+
+// Find the most known ancient ancestor 
+
+var array5 = [1, 2, 3, 4, 5]; 
+
+var addNext = function (current, next) {
+    return current + next; 
+};
+
+var isNextYounger = function (current, next) {
+    console.log('current ', current.born);
+    console.log('next ', next.born);
+    var born = current.born > next.born ? next.born : current.born;
+    console.log('born ', born); 
+    return born; 
+}
+
+var reduce = function (array, f, start) { 
+    var current = array[0];
+    for (var i = start; i < array.length; i += 1) {
+        current = f(current, array[i]); 
+        console.log(current);
+    }
+    return current; 
+};
+
+console.log(reduce(ancestry, isNextYounger, 0));
+
+
+
 
 
