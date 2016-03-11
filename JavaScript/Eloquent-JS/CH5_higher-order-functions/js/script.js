@@ -133,6 +133,57 @@ var female = function (person) { return person.sex === 'f'; }; // FILTER
 console.log(average(ancestry.filter(male).map(age))); 
 console.log(average(ancestry.filter(female).map(age)))
 
+// -----------------
+// RECURSION V2 - GREAT-GREAT-GREAT
+
+var byName = {}; 
+
+ancestry.forEach(function(person) {
+    byName[person.name] = person; 
+});
+
+console.log(byName); 
+
+var reduceAncestors = function (person, f, defaultValue) {
+    function valueFor (person) {
+        if (person == null){
+            return defaultValue; 
+        } else {
+            return f(person, valueFor(byName[person.mother]), valueFor(byName[person.father]));
+        }
+    }
+    return valueFor(person); 
+}
+
+var sharedDNA = function (person, fromMother, fromFather) {
+    if (person.name === "Pauwels van Haverbeke") {
+        return 1; 
+    } else {
+        return (fromMother + fromFather) / 2; 
+    }
+}
+
+var ph = byName["Philibert Haverbeke"]; 
+
+console.log(reduceAncestors(ph, sharedDNA, 0) / 4); 
+
+// -----------------
+
+var countAncestors = function (person, test) {
+    function combine(current, fromMother, fromFather) {
+        var thisOneCounts = current != person && test(current)
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
