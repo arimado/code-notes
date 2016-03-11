@@ -115,7 +115,7 @@ var map = function (array, f) {
 
 console.log(ancestry.map(function(index){
     return index.born;
-}))
+})); 
 
 
 
