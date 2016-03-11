@@ -167,13 +167,51 @@ var ph = byName["Philibert Haverbeke"];
 
 console.log(reduceAncestors(ph, sharedDNA, 0) / 4); 
 
-// -----------------
+// ----------------- 
+// RECURSION COMPOSABLE 
+// - INCOMPLETE 
 
 var countAncestors = function (person, test) {
     function combine(current, fromMother, fromFather) {
-        var thisOneCounts = current != person && test(current)
+        var thisOneCounts = current != person && test(current); 
     }
+} 
+
+// ----------------- 
+// RECURSION  
+
+
+// ----------------- 
+// CURRYING 
+
+// Function.prototype.curry = function () {
+//     var slice 
+//     var args 
+//     that = this; t
+//     return function () {
+//         return // the that function with the new args 
+//     }
+// }
+
+// var add1 = add(1); 
+
+// add1(5); // 6 
+
+
+// EXERCISES --------------------------
+
+var arrays = [[1, 2, 3], [4, 5], [6]];
+
+var flatten = function (previousValue, currentValue) { 
+    return previousValue.concat(currentValue);
 }
+
+console.log(arrays.reduce(flatten)); 
+
+
+
+
+
 
 
 
