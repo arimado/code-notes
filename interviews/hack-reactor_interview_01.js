@@ -106,14 +106,91 @@ If you find any bugs:
   - Put your thinking into action and make any changes necessary to make the function work as intended.
 */
 
-var map = function (collection, callback)
-  var result = [];
-  each(collection, callback); 
-  return result; 
+var map = function (collection, callback){
+    var result = [];
+    each(collection, callback); 
+    return result; 
+};
+  
+
+
+var map = function (collection, callback) {
+	var result = [];  
+}; 
+
+
+
+// ------------------------------------------------
+// *************************************************
+// *************************************************
+// Post interview **********************************
+// *************************************************
+// *************************************************
+
+var each = function (collection, callback) {
+    if (Array.isArray(collection)) {
+        for(var i = 0; i < collection.length; i += 1) {
+            callback(collection[i]); 
+        }
+    } else {
+        for (var key in collection) {
+            callback(collection[key]); 
+        }
+    }
 };
 
-var map = function(collection, callback) {
-	var result = []; 
-  
-  
-}; 
+var jaMap = function (collection, callback) {
+    var result = []; 
+    each(collection, callback); 
+    return result; 
+};
+
+var printScore = function (score) {
+  console.log(score);
+};
+
+// Stuck here 
+
+// -----------------------------------------
+
+
+// Implement map function that takes either array or object. 
+
+var jaMap2 = function (collection, callback) {
+    var result = []; 
+    if (Array.isArray(collection)) {
+        for(var i = 0; i < collection.length; i += 1) {
+            results.push(callback(collection[i])); 
+        }
+    } else {
+        for (var key in collection) {
+            results.push(callback(collection[key])); 
+        }
+    } 
+    return results; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
