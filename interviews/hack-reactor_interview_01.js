@@ -156,6 +156,18 @@ var printScore = function (score) {
 
 // Implement map function that takes either array or object. 
 
+var each = function (collection, callback) {
+    if (Array.isArray(collection)) {
+        for(var i = 0; i < collection.length; i += 1) {
+            callback(collection[i]); 
+        }
+    } else {
+        for (var key in collection) {
+            callback(collection[key]); 
+        }
+    }
+};
+
 var jaMap2 = function (collection, callback) {
     var result = []; 
     if (Array.isArray(collection)) {
@@ -169,6 +181,29 @@ var jaMap2 = function (collection, callback) {
     } 
     return results; 
 }
+
+
+// ------
+
+var each2 = function (collection, callback, result) {
+    if (Array.isArray(collection)) {
+        for(var i = 0; i < collection.length; i += 1) {
+            results.push(callback(collection[i])); 
+        }
+    } else {
+        for (var key in collection) {
+             results.push(callback(collection[key])); 
+        }
+    }
+    return result
+};
+
+
+var jaMap3 = function (collection, callback) {
+    var result = []; 
+    return each(collection, callback, result); 
+}
+
 
 
 
