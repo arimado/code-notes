@@ -131,7 +131,7 @@ var male = function (person) { return person.sex === 'm'; }; // FILTER
 var female = function (person) { return person.sex === 'f'; }; // FILTER 
 
 console.log(average(ancestry.filter(male).map(age))); 
-console.log(average(ancestry.filter(female).map(age)))
+console.log(average(ancestry.filter(female).map(age)));
 
 // -----------------
 // RECURSION V2 - GREAT-GREAT-GREAT
@@ -200,6 +200,8 @@ var countAncestors = function (person, test) {
 
 // EXERCISES --------------------------
 
+// Flattening
+
 var arrays = [[1, 2, 3], [4, 5], [6]];
 
 var flatten = function (previousValue, currentValue) { 
@@ -207,6 +209,51 @@ var flatten = function (previousValue, currentValue) {
 }
 
 console.log(arrays.reduce(flatten)); 
+
+// Mother-child age difference --------------------
+
+
+var average = function (array) {
+    return array.reduce(addCurrentNext) / array.length; 
+}
+
+function average(array) {
+    function plus(a, b) { return a + b }; 
+    return array.reduce(plus) / array.length; 
+} 
+
+
+// average() // takes an array of age differences between mother and childeren 
+
+var getAgeDiff = function (person) {
+    var currentAge, motherAge, ageDiff;
+    if(person.mother && byName[person.mother]) {
+        currentAge = age(person); 
+        motherAge = byName[person.mother].died - byName[person.mother].born; 
+        ageDiff = Math.abs(currentAge - motherAge); 
+    } else {
+        ageDiff = null  
+    }
+    return ageDiff
+} 
+
+var hasAge = function (person) {
+    return person;
+}
+
+var ageDiffArray = ancestry.map(getAgeDiff).filter(hasAge);
+
+console.log(ageDiffArray); 
+console.log(average(ageDiffArray));
+
+
+    // forEach person, find if has mother 
+    // if mother than get mother age 
+    // add difference to an array 
+
+
+
+
 
 
 
