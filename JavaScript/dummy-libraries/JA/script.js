@@ -14,7 +14,7 @@ var one23_ARR = [1, 2, 3];
 // - don't let it accept anything other than an array/object
 // - get rid of the else statement
 
-// http://stackoverflow.com/questions/14810506/map-function-for-objects-instead-of-arrays
+
 
 var modifyVal = function (val) {
     return val + ' - modified';
@@ -44,6 +44,9 @@ JA.MEGAMAP_old = function (collection, callback) {
     return result;
 };
 
+// Most techniques used from the below function was stolen from:
+// http://stackoverflow.com/questions/14810506/map-function-for-objects-instead-of-arrays
+
 JA.MEGAMAP = function (collection, callback) {
     var isArray = Array.isArray(collection),
         isObject = ((collection === null) || isArray || typeof collection == 'function') ? false : (typeof collection == 'object'),
@@ -62,7 +65,7 @@ JA.MEGAMAP = function (collection, callback) {
     }, dataType);
 
     return result;
-};
+}; 
 
 var returnedObject = JA.MEGAMAP(one23_OBJ, modifyVal);
 
