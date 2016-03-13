@@ -172,14 +172,14 @@ var jaMap2 = function (collection, callback) {
     var result = []; 
     if (Array.isArray(collection)) {
         for(var i = 0; i < collection.length; i += 1) {
-            results.push(callback(collection[i])); 
+            result.push(callback(collection[i])); 
         }
     } else {
         for (var key in collection) {
-            results.push(callback(collection[key])); 
+            result.push(callback(collection[key])); 
         }
     } 
-    return results; 
+    return result; 
 }
 
 
