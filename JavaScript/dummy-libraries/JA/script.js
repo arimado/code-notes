@@ -2,7 +2,7 @@
 
 JA = {};
 
-var one23_OBJ = { one: 1, "two sd": 2, three: 3 };
+var one23_OBJ = { one: 1, "two": 2, three: 3 };
 var one23_ARR = [1, 2, 3];
 
 
@@ -13,7 +13,6 @@ var one23_ARR = [1, 2, 3];
 //      -asd
 // - don't let it accept anything other than an array/object
 // - get rid of the else statement
-
 
 // http://stackoverflow.com/questions/14810506/map-function-for-objects-instead-of-arrays
 
@@ -45,6 +44,22 @@ JA.MEGAMAP = function (collection, callback) {
     return result;
 };
 
-var newObject = JA.MEGAMAP(one23_OBJ, modifyVal);
+JA.MEGAMAP2 = function (collection, callback) {
+    var isArray = Array.isArray(collection),
+        isObject = ((collection === null) || isArray || typeof collection == 'function') ? false : (typeof collection == 'object'),
+        dataType, result;
+    if (!isArray && !isObject) {
+        return console.log('MEGAMAP only accepts Arrays or Objects');
+    } else {
+        isArray ? dataType = [] : dataType = Object.create(null);
+        result = Object.keys(collection).reduce(function(previous, current) {
+            previous[current] = callback(collection[current]);
+            return previous;
+        }, dataType);
+        return result;
+    }
+}; 
 
-console.dir(newObject);
+var returnedObject = JA.MEGAMAP2(12, modifyVal);
+
+console.dir(returnedObject);
