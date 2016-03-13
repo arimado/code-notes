@@ -4,11 +4,11 @@
 
 var myArray = [1, 2, 3, 4, 5];
 
-var myObject = {}; 
+var myObject = {};
 
 myObject.name = "Jeremy Arimado";
 myObject.email = "jarimado@gmail.com";
-myObject.mobile = "+61421676516"; 
+myObject.mobile = "+61421676516";
 
 myObject['hairColor'] = 'black';
 
@@ -16,15 +16,15 @@ var print = function (val) {
 	console.log(val);
 }
 
-print(myArray[1]); 
+print(myArray[1]);
 
-print(myObject.name); 
+print(myObject.name);
 
 
-// You are going to write an `each` function which takes a collection and an callback function and 
+// You are going to write an `each` function which takes a collection and an callback function and
 // invokes the callback function on each item in the collection.
 
-// Here are 2 example use cases of `each`. Use these examples as guidance for how an implementation of 
+// Here are 2 example use cases of `each`. Use these examples as guidance for how an implementation of
 // `each` should behave.
 
 // First of all, `each` should be able to handle arrays:
@@ -65,26 +65,26 @@ each(capitals, printCapital);
 var each = function (collection, callback) {
   if (Array.isArray(collection)) {
   	for (var i = 0; i < collection.length; i += 1) {
-    	callback(collection[i]); 
+    	callback(collection[i]);
     }
   } else {
     for (var i in collection) {
-      callback(collection[i]); 
+      callback(collection[i]);
     }
   }
 };
 
 // Use your implementation of `each` to log each element of `myArray`, which you created above:
 
-each(myArray, print); 
+each(myArray, print);
 
 // Use your implementation of `each` to log each value of `myObject`, which you created above:
- 
- each(myObject, function(val) {
-	console.log(val); 
- }); 
 
-// Here is an example use case of `map`. Use this example as guidance for how an implementation of 
+ each(myObject, function(val) {
+	console.log(val);
+ });
+
+// Here is an example use case of `map`. Use this example as guidance for how an implementation of
 // `map` should behave.
 
 var allottedMinutes = [15, 20, 32];
@@ -108,15 +108,15 @@ If you find any bugs:
 
 var map = function (collection, callback){
     var result = [];
-    each(collection, callback); 
-    return result; 
+    each(collection, callback);
+    return result;
 };
-  
+
 
 
 var map = function (collection, callback) {
-	var result = [];  
-}; 
+	var result = [];
+};
 
 
 
@@ -130,56 +130,56 @@ var map = function (collection, callback) {
 var each = function (collection, callback) {
     if (Array.isArray(collection)) {
         for(var i = 0; i < collection.length; i += 1) {
-            callback(collection[i]); 
+            callback(collection[i]);
         }
     } else {
         for (var key in collection) {
-            callback(collection[key]); 
+            callback(collection[key]);
         }
     }
 };
 
 var jaMap = function (collection, callback) {
-    var result = []; 
-    each(collection, callback); 
-    return result; 
+    var result = [];
+    each(collection, callback);
+    return result;
 };
 
 var printScore = function (score) {
   console.log(score);
 };
 
-// Stuck here 
+// Stuck here
 
 // -----------------------------------------
 
 
-// Implement map function that takes either array or object. 
+// Implement map function that takes either array or object.
 
 var each = function (collection, callback) {
     if (Array.isArray(collection)) {
         for(var i = 0; i < collection.length; i += 1) {
-            callback(collection[i]); 
+            callback(collection[i]);
         }
     } else {
         for (var key in collection) {
-            callback(collection[key]); 
+            callback(collection[key]);
         }
     }
 };
 
 var jaMap2 = function (collection, callback) {
-    var result = []; 
+    var result = [];
     if (Array.isArray(collection)) {
         for(var i = 0; i < collection.length; i += 1) {
-            result.push(callback(collection[i])); 
+            result.push(callback(collection[i]));
         }
     } else {
         for (var key in collection) {
-            result.push(callback(collection[key])); 
+            result.push(callback(collection[key]));
         }
-    } 
-    return result; 
+    }
+    return result;
 }
 
 
@@ -188,11 +188,11 @@ var jaMap2 = function (collection, callback) {
 var each2 = function (collection, callback, result) {
     if (Array.isArray(collection)) {
         for(var i = 0; i < collection.length; i += 1) {
-            results.push(callback(collection[i])); 
+            results.push(callback(collection[i]));
         }
     } else {
         for (var key in collection) {
-             results.push(callback(collection[key])); 
+             results.push(callback(collection[key]));
         }
     }
     return result
@@ -200,32 +200,6 @@ var each2 = function (collection, callback, result) {
 
 
 var jaMap3 = function (collection, callback) {
-    var result = []; 
-    return each(collection, callback, result); 
+    var result = [];
+    return each(collection, callback, result);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
