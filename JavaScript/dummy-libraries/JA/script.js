@@ -26,7 +26,7 @@ JA.isPlainObject = function (o) { // FROM STACKOVERFLOW
           :(typeof o == 'object');
 }
 
-JA.MEGAMAP = function (collection, callback) {
+JA.MEGAMAP_old = function (collection, callback) {
     var result;
     if (Array.isArray(collection)) {
         result = [];
@@ -44,22 +44,26 @@ JA.MEGAMAP = function (collection, callback) {
     return result;
 };
 
-JA.MEGAMAP2 = function (collection, callback) {
+JA.MEGAMAP = function (collection, callback) {
     var isArray = Array.isArray(collection),
         isObject = ((collection === null) || isArray || typeof collection == 'function') ? false : (typeof collection == 'object'),
         dataType, result;
-    if (!isArray && !isObject) {
-        return console.log('MEGAMAP only accepts Arrays or Objects');
-    } else {
-        isArray ? dataType = [] : dataType = Object.create(null);
-        result = Object.keys(collection).reduce(function(previous, current) {
-            previous[current] = callback(collection[current]);
-            return previous;
-        }, dataType);
-        return result;
-    }
-}; 
 
-var returnedObject = JA.MEGAMAP2(12, modifyVal);
+    // exit out and print error to console if not array or object
+    if (!isArray && !isObject) return console.log('MEGAMAP only accepts Arrays or Objects');
+
+    // use Object.create(null) to create an object that does not inherit any prototype
+    isArray ? dataType = [] : dataType = Object.create(null);
+
+    // use Object.keys and reduce to operate on both arrays and objects
+    result = Object.keys(collection).reduce(function(previous, current) {
+        previous[current] = callback(collection[current]);
+        return previous;
+    }, dataType);
+
+    return result;
+};
+
+var returnedObject = JA.MEGAMAP(one23_OBJ, modifyVal);
 
 console.dir(returnedObject);
