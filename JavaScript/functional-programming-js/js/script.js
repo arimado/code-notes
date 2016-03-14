@@ -65,12 +65,16 @@ console.log(JSON.stringify([ [1,2,3], [4,5,6], [7,8,9] ].concatAll()));
 	// ------------   INSERT CODE HERE!  -----------------------------------
 	// Use map and concatAll to flatten the movieLists in a list of video ids.
 
+
     var j = movieLists.map(function (list) {
+        // why do you need to return here?
+        // because it needs something to return so it can push?
+        // because the inner function returns something, but it is not used anywhere outside itself
          return list.videos.map(function (video){
              console.log(video.id);
              return video.id;
          });
-     }) 
+     }).concatAll()
 
 	// ------------   INSERT CODE HERE!  -----------------------------------
 
