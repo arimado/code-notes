@@ -9,7 +9,7 @@ console.log('script.js init');
 //
 // Don't remove every occurrence, since you need to keep a single occurrence of a number.
 // The order in which you present your output does not matter. So returning [1,2,3] is the same as returning [3,1,2].
-// Do not modify the list you take as input! Instead, return a new list.
+// Do not modify the list you take as input! Instead, return a new list. 
 
 var isUnique = function (currentVal, uniqueValues) {
     if (uniqueValues.length === 0) return true;
@@ -22,7 +22,7 @@ var isUnique = function (currentVal, uniqueValues) {
         }
         return true;
     }
-} 
+}
 
 var removeDuplicates = function (values) {
     var uniqueValues = [], currentVal;
