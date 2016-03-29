@@ -2,10 +2,10 @@
   "name": "browserify-learn",
   "version": "1.0.0",
   "description": "Learning how to use browserify",
-  "main": "index.js",
+  "main": "./js/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "browserify ./js/app.js -o bundle.js"
   },
   "author": "Jeremy Arimado",
   "license": "MIT"
-} 
+}
