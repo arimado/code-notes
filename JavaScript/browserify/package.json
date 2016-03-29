@@ -7,5 +7,8 @@
     "build": "browserify ./js/app.js -o bundle.js"
   },
   "author": "Jeremy Arimado",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^2.2.2"
+  }
 }
