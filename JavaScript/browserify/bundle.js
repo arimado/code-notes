@@ -7,9 +7,25 @@ var button = $('<button/>').html('click this').on('click', function() {
 
 $('body').append(button);
 
-console.log('sup');
+var requriedString = require('./hello.js'); 
 
-},{"jquery":2}],2:[function(require,module,exports){
+console.log(requriedString);
+
+},{"./hello.js":2,"jquery":3}],2:[function(require,module,exports){
+// Says hello
+
+(function(){
+    alert('hello added as a dependency')
+})();
+
+var hello = function() {
+    return 'this is a string';
+}
+
+
+module.exports = hello()
+
+},{}],3:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.2.2
  * http://jquery.com/
