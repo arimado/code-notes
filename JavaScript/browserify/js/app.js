@@ -6,6 +6,6 @@ var button = $('<button/>').html('click this').on('click', function() {
 
 $('body').append(button);
 
-var requriedString = require('./hello.js'); 
+var requriedString = require('./hello.js');
 
-console.log(requriedString);
+console.log(requriedString); 

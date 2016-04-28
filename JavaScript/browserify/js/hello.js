@@ -6,7 +6,6 @@
 
 var hello = function() {
     return 'this is a string';
-}
-
+} 
 
 module.exports = hello()
