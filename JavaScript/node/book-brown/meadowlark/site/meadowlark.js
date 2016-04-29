@@ -1,10 +1,25 @@
 var express = require('express');
 var app = express();
 
+var handlebars = require('express3-handlebars').create({defaultLayout: 'main'});
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
+
 app.set('port', process.env.PORT || 3000);
 
-// Basically I think an error page for different status codes
 
+// add routes for the home page and about age
+app.get('/', function(req, res){
+    res.type('text/plain');
+    res.send('Meadowlark Travel Homepage');
+});
+
+app.get('/about', function(req, res) {
+    res.type('text/plain');
+    res.send('About Meadowlark About page');
+});
+
+// Basically I think an error page for different status codes
 // custom 404 page
 app.use(function(req, res) {
     res.type('text/plain');
