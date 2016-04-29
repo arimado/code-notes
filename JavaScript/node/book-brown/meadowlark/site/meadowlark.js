@@ -10,29 +10,25 @@ app.set('port', process.env.PORT || 3000);
 
 // add routes for the home page and about age
 app.get('/', function(req, res){
-    res.type('text/plain');
-    res.send('Meadowlark Travel Homepage');
+    res.render('home');
 });
 
 app.get('/about', function(req, res) {
-    res.type('text/plain');
-    res.send('About Meadowlark About page');
+    res.render('about');
 });
 
 // Basically I think an error page for different status codes
 // custom 404 page
 app.use(function(req, res) {
-    res.type('text/plain');
     res.status(404);
-    res.send('404 - Not Found lol city');
+    res.render('404');
 });
 
 // custom 500 page
 app.use(function (err, req, res, next) {
     console.log(err.stack);
-    res.type('text/plain');
     res.status(500);
-    res.send('500 - Server Error');
+    res.render('500');
 });
 
 app.listen(app.get('port'), function() {
