@@ -24,8 +24,19 @@ app.get('/', function(req, res){
 
 // ABOUT PAGE JS
 app.get('/about', function(req, res) {
-    res.render('about', { fortune: fortune.getFortune(), pageTestScript: '/qa/tests-about.js' }); 
+    res.render('about', { fortune: fortune.getFortune(), pageTestScript: '/qa/tests-about.js' });
 });
+
+// hood-river page
+app.get('/tours/hood-river', function(req, res) {
+    res.render('tours/hood-river');
+});
+
+// request-group-rate page
+app.get('/tours/request-group-rate', function(req, res) {
+    res.render('tours/request-group-rate');
+}); 
+
 
 // Basically I think an error page for different status codes
 // custom 404 page
@@ -40,6 +51,7 @@ app.use(function (err, req, res, next) {
     res.status(500);
     res.render('500');
 });
+
 
 app.listen(app.get('port'), function() {
     console.log('Express started on tests.loc:' + app.get('port') + '; press Ctrl-C to terminate.');
