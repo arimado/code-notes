@@ -10,6 +10,12 @@ app.use(express.static(__dirname + '/public'));
 
 app.set('port', process.env.PORT || 3000);
 
+app.use(function(req, res, next) {
+    var isTesting = app.get('env') !== 'production' && req.query.test === '1';
+    res.locals.showTests = isTesting; 
+    next();
+})
+
 
 // add routes for the home page and about age
 app.get('/', function(req, res){
@@ -33,7 +39,7 @@ app.use(function (err, req, res, next) {
     console.log(err.stack);
     res.status(500);
     res.render('500');
-});  
+});
 
 app.listen(app.get('port'), function() {
     console.log('Express started on tests.loc:' + app.get('port') + '; press Ctrl-C to terminate.');
