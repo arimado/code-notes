@@ -12,7 +12,7 @@ app.set('port', process.env.PORT || 3000);
 
 app.use(function(req, res, next) {
     var isTesting = app.get('env') !== 'production' && req.query.test === '1';
-    res.locals.showTests = isTesting; 
+    res.locals.showTests = isTesting;
     next();
 })
 
@@ -24,7 +24,7 @@ app.get('/', function(req, res){
 
 // ABOUT PAGE JS
 app.get('/about', function(req, res) {
-    res.render('about', {fortune: fortune.getFortune()});
+    res.render('about', { fortune: fortune.getFortune(), pageTestScript: '/qa/tests-about.js' }); 
 });
 
 // Basically I think an error page for different status codes
