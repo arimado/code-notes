@@ -1,11 +1,12 @@
 var express = require('express');
 var app = express();
+var fortune = require('./lib/fortune.js'); // prefixed with dot or else require would look in node-modules
 
 var handlebars = require('express3-handlebars').create({defaultLayout: 'main'});
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
-app.use(express.static(__dirname + '/public'));  
+app.use(express.static(__dirname + '/public'));
 
 app.set('port', process.env.PORT || 3000);
 
@@ -15,8 +16,9 @@ app.get('/', function(req, res){
     res.render('home');
 });
 
+// ABOUT PAGE JS
 app.get('/about', function(req, res) {
-    res.render('about');
+    res.render('about', {fortune: fortune.getFortune()});
 });
 
 // Basically I think an error page for different status codes
@@ -31,8 +33,7 @@ app.use(function (err, req, res, next) {
     console.log(err.stack);
     res.status(500);
     res.render('500');
-});
-
+});  
 
 app.listen(app.get('port'), function() {
     console.log('Express started on tests.loc:' + app.get('port') + '; press Ctrl-C to terminate.');
