@@ -2,8 +2,19 @@ var express = require('express');
 var app = express();
 var fortune = require('./lib/fortune.js'); // prefixed with dot or else require would look in node-modules
 
-var handlebars = require('express3-handlebars').create({
-    defaultLayout: 'main'});
+var handlebars = require('express-handlebars').create({
+    defaultLayout: 'main',
+    helpers: {
+        section: function(name, options) {
+            if(!this._sections) this._sections = {};
+            this._sections[name] = options.fn(this);
+            return options.fn();
+        },
+        testHelper: function(p1, p2, p3) {
+            return 'testHelper:';
+        }
+    }
+});
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -50,7 +61,6 @@ var getWeatherData = function () {
         ]
     };
 };
-
 
 // ****************************************
 // ROUTES ---------------------------------
@@ -108,9 +118,6 @@ app.use(function (err, req, res, next) {
     res.status(500);
     res.render('500');
 });
-
-
-
 
 app.listen(app.get('port'), function() {
     console.log('Express started on tests.loc:' + app.get('port') + '; press Ctrl-C to terminate.');
