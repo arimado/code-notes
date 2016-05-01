@@ -16,6 +16,43 @@ app.use(function(req, res, next) {
     next();
 })
 
+// ****************************************
+// LOGIC ----------------------------------
+// ****************************************
+
+var getWeatherData = function () {
+    return {
+        locations: [
+            {
+                name: 'Portland',
+                forecastUrl: 'http://www.wunderground.com/US/OR/Portland.html',
+                iconUrl: 'http://icons-ak.wxug.com/i/c/k/cloudy.gif',
+                weather: 'Overcast',
+                temp: '54.1 F (12.3 C)'
+            },
+            {
+                name: 'Bend',
+                forecastUrl: 'http://www.wunderground.com/US/OR/Bend.html',
+                iconUrl: 'http://icons-ak.wxug.com/i/c/k/partlycloudy.gif',
+                weather: 'Partly Cloudy',
+                temp: '55.0 F (12.8 C)'
+            },
+            {
+                name: 'Manzanita',
+                forecastUrl: 'http://www.wunderground.com/US/OR/Manzanita.html',
+                iconUrl: 'http://icons-ak.wxug.com/i/c/k/rain.gif',
+                weather: 'Light Rain',
+                temp: '55.0 F (12.8 C)'
+            }
+
+        ]
+    };
+};
+
+
+// ****************************************
+// ROUTES ---------------------------------
+// ****************************************
 
 // add routes for the home page and about age
 app.get('/', function(req, res){
@@ -42,6 +79,19 @@ app.get('/tours/oregon-coast', function(req, res) {
     res.render('tours/oregon-coast');
 });
 
+// ****************************************
+// MIDDLEWARE -----------------------------
+// ****************************************
+
+app.use(function(req, res, next) {
+    if(!res.locals.partials) res.locals.partials = {};
+    res.locals.partials.weather = getWeatherData();
+    next(); // WHAT DOES THIS DO?
+});
+
+// ****************************************
+// HANDLERS -------------------------------
+// ****************************************
 
 // Basically I think an error page for different status codes
 // custom 404 page

@@ -1,12 +1,3 @@
-
-
-
-
-
-
-
-
-
 var Browser = require('zombie');
 var assert = require('chai').assert // what's going on here mate?
 
