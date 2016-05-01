@@ -2,7 +2,9 @@ var express = require('express');
 var app = express();
 var fortune = require('./lib/fortune.js'); // prefixed with dot or else require would look in node-modules
 
-var handlebars = require('express3-handlebars').create({defaultLayout: 'main'});
+var handlebars = require('express3-handlebars').create({
+    defaultLayout: 'main'});
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
@@ -56,7 +58,7 @@ var getWeatherData = function () {
 
 // add routes for the home page and about age
 app.get('/', function(req, res){
-    res.render('home');
+    res.render('home', getWeatherData());
 });
 
 // about page
@@ -83,10 +85,10 @@ app.get('/tours/oregon-coast', function(req, res) {
 // MIDDLEWARE -----------------------------
 // ****************************************
 
-app.use(function(req, res, next) {
+app.use(function(req, res, next){
     if(!res.locals.partials) res.locals.partials = {};
     res.locals.partials.weather = getWeatherData();
-    next(); // WHAT DOES THIS DO?
+    next();
 });
 
 // ****************************************
@@ -106,6 +108,8 @@ app.use(function (err, req, res, next) {
     res.status(500);
     res.render('500');
 });
+
+
 
 
 app.listen(app.get('port'), function() {
