@@ -8,7 +8,7 @@ var handlebars = require('express-handlebars').create({
         section: function(name, options) {
             if(!this._sections) this._sections = {};
             this._sections[name] = options.fn(this);
-            return options.fn();
+            return null;
         },
         testHelper: function(p1, p2, p3) {
             return 'testHelper:';
