@@ -22,7 +22,7 @@ app.get('/', function(req, res){
     res.render('home');
 });
 
-// ABOUT PAGE JS
+// about page
 app.get('/about', function(req, res) {
     res.render('about', { fortune: fortune.getFortune(), pageTestScript: '/qa/tests-about.js' });
 });
@@ -35,7 +35,12 @@ app.get('/tours/hood-river', function(req, res) {
 // request-group-rate page
 app.get('/tours/request-group-rate', function(req, res) {
     res.render('tours/request-group-rate');
-}); 
+});
+
+// oregon-coast page
+app.get('/tours/oregon-coast', function(req, res) {
+    res.render('tours/oregon-coast');
+});
 
 
 // Basically I think an error page for different status codes

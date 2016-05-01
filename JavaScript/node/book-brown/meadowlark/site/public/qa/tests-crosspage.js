@@ -30,7 +30,7 @@ suite('Cross-Page Tests', function () {
                 done();
             });
         });
-    })
+    });
 
     test('visiting the "request group thing" should NOT populate the referrer', function(done){
         var referrer = 'http://test.loc:3000/tours/request-group-rate';
@@ -40,6 +40,5 @@ suite('Cross-Page Tests', function () {
                 done();
             });
         });
-    });  
-
+    });
 });
