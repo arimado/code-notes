@@ -11,7 +11,7 @@ var handlebars = require('express-handlebars').create({
             return null;
         }
     }
-}); 
+});
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -88,10 +88,27 @@ app.get('/tours/oregon-coast', function(req, res) {
     res.render('tours/oregon-coast');
 });
 
-// oregon-coast page
+// jquery-test page
 app.get('/jquery-test', function(req, res) {
     res.render('jquery-test');
 });
+
+// nursery-rhyme page
+
+app.get('/nursery-rhyme', function(req, res){
+    res.render('nursery-rhyme');
+});
+
+app.get('/data/nursery-rhyme', function(req, res){
+    res.json({
+        animal: 'squirrel',
+        bodyPart: 'tail',
+        adjective: 'bushy',
+        noun: 'heck',
+    });
+}); 
+
+
 
 // ****************************************
 // MIDDLEWARE -----------------------------
