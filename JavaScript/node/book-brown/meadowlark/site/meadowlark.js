@@ -5,13 +5,37 @@ var fortune = require('./lib/fortune.js'); // prefixed with dot or else require 
 var handlebars = require('express-handlebars').create({
     defaultLayout: 'main',
     helpers: {
-        section: function(name, options) {
+        section: function(name, options) { 
             if(!this._sections) this._sections = {};
             this._sections[name] = options.fn(this);
             return null;
         },
-        testHelper: function(p1, p2, p3) {
-            return 'testHelper:';
+        testHelperParam: function(p1, p2) {
+            // console.log('testHelperParam #####################');
+            // console.log('THIS ------------------');
+            // console.dir(this);
+            // console.log('------------------------');
+            // console.log('P1 ------------------');
+            // console.dir(p1);
+            // console.log('------------------------');
+            // console.log('P2 ------------------');
+            // console.dir(p2);
+            // console.log('------------------------');
+            // console.log('p2.fn(this) ------------------');
+            // console.dir(p2.fn(this));
+            // console.log('------------------------');
+        },
+        testHelperNoParam: function(p1, p2) {
+            // console.log('testHelperNoParam ##################');
+            // console.log('THIS ------------------');
+            // console.dir(this);
+            // console.log('------------------------');
+            // console.log('P1 ------------------');
+            // console.dir(p1);
+            // console.log('------------------------');
+            // console.log('P2 ------------------');
+            // console.dir(p2);
+            // console.log('------------------------');
         }
     }
 });
