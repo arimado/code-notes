@@ -9,36 +9,9 @@ var handlebars = require('express-handlebars').create({
             if(!this._sections) this._sections = {};
             this._sections[name] = options.fn(this);
             return null;
-        },
-        testHelperParam: function(p1, p2) {
-            // console.log('testHelperParam #####################');
-            // console.log('THIS ------------------');
-            // console.dir(this);
-            // console.log('------------------------');
-            // console.log('P1 ------------------');
-            // console.dir(p1);
-            // console.log('------------------------');
-            // console.log('P2 ------------------');
-            // console.dir(p2);
-            // console.log('------------------------');
-            // console.log('p2.fn(this) ------------------');
-            // console.dir(p2.fn(this));
-            // console.log('------------------------');
-        },
-        testHelperNoParam: function(p1, p2) {
-            // console.log('testHelperNoParam ##################');
-            // console.log('THIS ------------------');
-            // console.dir(this);
-            // console.log('------------------------');
-            // console.log('P1 ------------------');
-            // console.dir(p1);
-            // console.log('------------------------');
-            // console.log('P2 ------------------');
-            // console.dir(p2);
-            // console.log('------------------------');
         }
     }
-});
+}); 
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
