@@ -5,7 +5,7 @@ var fortune = require('./lib/fortune.js'); // prefixed with dot or else require 
 var handlebars = require('express-handlebars').create({
     defaultLayout: 'main',
     helpers: {
-        section: function(name, options) { 
+        section: function(name, options) {
             if(!this._sections) this._sections = {};
             this._sections[name] = options.fn(this);
             return null;
@@ -113,6 +113,11 @@ app.get('/tours/request-group-rate', function(req, res) {
 // oregon-coast page
 app.get('/tours/oregon-coast', function(req, res) {
     res.render('tours/oregon-coast');
+});
+
+// oregon-coast page
+app.get('/jquery-test', function(req, res) {
+    res.render('jquery-test');
 });
 
 // ****************************************
