@@ -1,9 +1,14 @@
 var express = require('express');
 var app = express();
-var fortune = require('./lib/fortune.js'); // prefixed with dot or else require would look in node-modules
-var bodyparserInvoke = require('body-parser')(); // why is this invoked ???
+var fortune = require('./lib/fortune.js'); // prefixed with dot or else     require would look in node-modules
+var bodyparserInvoke = require('body-parser')(); // why is this invoked ??
+                                                 // possibly becaause of the fact you are using it in app.use() middleware thingy?
+
 var formidable = require('formidable');
 var jqupload = require('jquery-file-upload-middleware');
+var credentials = require('./credentials.js');
+var cookieParserInvoke = require('cookie-parser')(credentials.cookieSecret);
+var sessionInvoke = require('express-session')();
 
 var handlebars = require('express-handlebars').create({
     defaultLayout: 'main',
@@ -29,6 +34,58 @@ app.use(function(req, res, next) {
     next();
 })
 
+//  Cookies + Sessions
+
+app.use(cookieParserInvoke);
+app.use(sessionInvoke);
+
+app.use(function (req, res, next) {
+    res.locals.flash = req.session.flash;
+    delete req.session.flash;
+    next();
+});
+
+// for now, we're mocking NewsletterSignup:
+function NewsletterSignup(){
+}
+NewsletterSignup.prototype.save = function(callback){
+	callback();
+};
+
+var VALID_EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
+app.post('/newsletter', function(req, res){
+	var name = req.body.name || '', email = req.body.email || '';
+	// input validation
+	if(!email.match(VALID_EMAIL_REGEX)) {
+		if(req.xhr) return res.json({ error: 'Invalid name email address.' });
+		req.session.flash = {
+			type: 'danger',
+			intro: 'Validation error!',
+			message: 'The email address you entered was  not valid.',
+		};
+		return res.redirect(303, '/newsletter/archive');
+	}
+	new NewsletterSignup({ name: name, email: email }).save(function(err){
+		if(err) {
+			if(req.xhr) return res.json({ error: 'Database error.' });
+			req.session.flash = {
+				type: 'danger',
+				intro: 'Database error!',
+				message: 'There was a database error; please try again later.',
+			};
+			return res.redirect(303, '/newsletter/archive');
+		}
+		if(req.xhr) return res.json({ success: true });
+		req.session.flash = {
+			type: 'success',
+			intro: 'Thank you!',
+			message: 'You have now been signed up for the newsletter.',
+		};
+		return res.redirect(303, '/newsletter/archive');
+	});
+});
+
 // jQuery file upload
 
 app.use('/upload', function(req, res, next){
@@ -41,6 +98,8 @@ app.use('/upload', function(req, res, next){
         return '/uploads/' + now; },
     })(req, res, next); // self-invoked with req,res,next
 });
+
+
 
 
 // Bodyparser
@@ -136,11 +195,17 @@ var getWeatherData = function () {
 // add routes for the home page and about age
 app.get('/', function(req, res){
     res.render('home', getWeatherData());
+    res.cookie('monster', 'nom nom');
+    res.cookie('signed_monster', 'nom nom', { signed: true });
 });
 
 // about page
 app.get('/about', function(req, res) {
     res.render('about', { fortune: fortune.getFortune(), pageTestScript: '/qa/tests-about.js' });
+    var monster = req.cookies.monster;
+    var signedMonster = req.signedCookies.signed_monster;
+    console.log(monster);
+    console.log(signedMonster);
 });
 
 // hood-river page
