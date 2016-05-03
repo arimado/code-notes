@@ -9,12 +9,15 @@
   "author": "Jeremy Arimado",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.15.0",
     "express": "^4.13.4",
-    "express-handlebars": "^3.0.0"
+    "express-handlebars": "^3.0.0",
+    "formidable": "^1.0.17",
+    "jquery-file-upload-middleware": "^0.1.7"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.4.5",
     "zombie": "^4.2.1"
   }
-} 
+}
