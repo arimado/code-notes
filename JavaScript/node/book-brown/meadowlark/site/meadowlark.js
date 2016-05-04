@@ -34,6 +34,86 @@ app.use(function(req, res, next) {
     next();
 })
 
+// ------------------------------------------------------
+// Middleware tests *************************************
+// ------------------------------------------------------
+
+
+// app.use(function (req, res, next) {
+//     console.log('processing request for ""' + req.url + '".......')
+//     next();
+// });
+//
+// app.use(function (req, res, next) {
+//     console.log('terminating request');
+//     res.send('thanks for palying!');
+//
+// });
+//
+// app.use(function (req, res, next) {
+//     console.log('whoops, ill never get called!');
+// });
+
+
+
+// app.use(function (req, res, next) {             //LOG ALLWAYS
+//     console.log('\n\nALLWAYS');
+//     next();
+// });
+//
+// app.get('/a', function(req, res, next) {              //terminates a
+//     console.log('/a: route terminated');
+//     res.send('a')
+// });
+//
+// app.get('/a', function (req, res) {             //cant go back to a
+//     console.log('/a: route terminated');
+//     res.send('/a: never called');
+// });
+//
+// app.get('/b', function (req, res, next) {       // Not terminated?
+//     console.log('/b: route not terminated');
+//     next();
+// });
+//
+// app.use(function (req, res, next) {             //sometimes only gets logged on
+//     console.log('SOMETIMES');                   // certain non terminated routes?
+//     next();
+// });
+//
+// app.get('/b', function (req, res, next) {       //why error? was thr route terminated?
+//     console.log('/b (part 2): error thrown');
+//     throw new Error('b failed');
+// });
+//
+// app.use('/c', function (err, req) {             //error
+//     console.log('/c: error thrown');
+//     throw new Error('c failed');
+// });
+//
+// app.use('/c', function (err, req, res, next) {                      //
+//     console.log('unhandled error detected: ' + err.message);
+//     res.send('500 - server error');
+// });
+//
+// app.use(function(req, res) {
+//     console.log('route not handled');
+//     res.send('404 - not found');
+// });
+
+// app.listen(3000, function () {
+//     console.log('listening on 3000');
+// });
+
+
+
+
+
+
+
+
+
+
 //  Cookies + Sessions
 
 app.use(cookieParserInvoke);
@@ -242,8 +322,6 @@ app.get('/data/nursery-rhyme', function(req, res){
         noun: 'heck',
     });
 });
-
-
 
 // ****************************************
 // MIDDLEWARE -----------------------------
