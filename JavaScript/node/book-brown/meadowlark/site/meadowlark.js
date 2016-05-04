@@ -52,9 +52,7 @@ app.use(function(req, res, next) {
 //
 // app.use(function (req, res, next) {
 //     console.log('whoops, ill never get called!');
-// });
-
-
+// }); 
 
 // app.use(function (req, res, next) {             //LOG ALLWAYS
 //     console.log('\n\nALLWAYS');
