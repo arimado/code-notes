@@ -1,14 +1,17 @@
+// libraries
+
 var express = require('express');
 var app = express();
 var fortune = require('./lib/fortune.js'); // prefixed with dot or else     require would look in node-modules
 var bodyparserInvoke = require('body-parser')(); // why is this invoked ??
                                                  // possibly becaause of the fact you are using it in app.use() middleware thingy?
-
 var formidable = require('formidable');
 var jqupload = require('jquery-file-upload-middleware');
 var credentials = require('./credentials.js');
 var cookieParserInvoke = require('cookie-parser')(credentials.cookieSecret);
 var sessionInvoke = require('express-session')();
+var nodemailer = require('nodemailer');
+var emailService = require('./lib/email.js')(credentials); // pass in the credentials to this email service
 
 var handlebars = require('express-handlebars').create({
     defaultLayout: 'main',
@@ -33,6 +36,14 @@ app.use(function(req, res, next) {
     res.locals.showTests = isTesting;
     next();
 })
+// ------------------------------------------------------
+// Sending Email ****************************************
+// ------------------------------------------------------
+
+app.get('/email', function (req, res, next) {
+    emailService.send('jarimado@gmail.com','test subject', 'lol body');
+    next()
+});
 
 // ------------------------------------------------------
 // Middleware tests *************************************
@@ -52,7 +63,7 @@ app.use(function(req, res, next) {
 //
 // app.use(function (req, res, next) {
 //     console.log('whoops, ill never get called!');
-// }); 
+// });
 
 // app.use(function (req, res, next) {             //LOG ALLWAYS
 //     console.log('\n\nALLWAYS');
@@ -103,15 +114,6 @@ app.use(function(req, res, next) {
 //     console.log('listening on 3000');
 // });
 
-
-
-
-
-
-
-
-
-
 //  Cookies + Sessions
 
 app.use(cookieParserInvoke);
@@ -135,6 +137,7 @@ var VALID_EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z
 app.post('/newsletter', function(req, res){
 	var name = req.body.name || '', email = req.body.email || '';
 	// input validation
+
 	if(!email.match(VALID_EMAIL_REGEX)) {
 		if(req.xhr) return res.json({ error: 'Invalid name email address.' });
 		req.session.flash = {
