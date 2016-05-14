@@ -1,0 +1,21 @@
+{
+  "name": "user-login",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jeremy Arimado",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "debug": "~0.7.4",
+    "ejs": "^2.2.4",
+    "express-session": "^1.8.1",
+    "moment": "^2.8.3",
+    "morgan": "~1.0.0"
+  }
+} 
