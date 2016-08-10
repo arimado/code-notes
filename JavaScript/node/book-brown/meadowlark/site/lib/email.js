@@ -11,7 +11,7 @@ module.exports = function( credentials ) {
     });
 
     var sender = '"Meadowlark Travel" <info@Meadowlarklol.com>';
-    var errorRecipient = credentials.auth.user
+    var errorRecipient = credentials.auth.user;
 
     return {
         send: function ( to, subj, body ) {

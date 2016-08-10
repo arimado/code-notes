@@ -35,7 +35,9 @@ app.use(function(req, res, next) {
     var isTesting = app.get('env') !== 'production' && req.query.test === '1';
     res.locals.showTests = isTesting;
     next();
-})
+}); 
+
+
 // ------------------------------------------------------
 // Sending Email ****************************************
 // ------------------------------------------------------
