@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Revision</title>
+</head>
+<body>
+
+    <div id="test">
+        <ul>
+            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi asperiores in eius, earum expedita. Minima iste, odio nemo porro itaque laudantium placeat iure provident iusto, inventore nihil ipsum hic eos?</li>
+            <li>Dignissimos provident, beatae itaque a quis non aut. Distinctio, ducimus veniam voluptatibus ratione id, eveniet harum maxime cumque pariatur culpa quidem iste reprehenderit incidunt aspernatur error, voluptatum veritatis doloremque adipisci.</li>
+            <li>Minus harum ut autem temporibus quia, nihil ea fugit eaque aliquam commodi eos, nesciunt est, suscipit provident nobis cum dignissimos incidunt. Cupiditate explicabo velit ratione corrupti voluptatum. Cupiditate, voluptatem nostrum.</li>
+            <li>Sed recusandae, et maxime, deserunt sequi cumque perspiciatis obcaecati nesciunt suscipit atque aperiam? Ea, accusantium harum perferendis laborum. Excepturi laboriosam saepe architecto illum, ipsam! Accusamus quas voluptates, eos pariatur sed.</li>
+            <li>Libero consectetur possimus, ab magnam reiciendis nihil ea earum assumenda a itaque molestias dolores optio, quisquam ex excepturi officiis eius aliquid quidem fugiat aut! Excepturi, tempore reiciendis ipsum nihil labore.</li>
+        </ul>
+
+
+        <div>
+            <div><div><div><div></div></div></div></div>
+        </div>
+
+    </div>
+
+</body>
+
+
+
+<script>
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+
+var stooge = {};
+stooge.firstname = 'Jer';
+stooge.lastname = 'Ari';
+
+var another_stooge = Object.create(stooge)
+var deeper_stooge = Object.create(another_stooge)
+
+// Delegation
+another_stooge.firstname; // 'Jer'
+deeper_stooge.firstname; // 'Jer'
+
+
+// function invocation
+
+// method invocation
+
+var bruh = {
+    greet: 0,
+    sup: function () {
+        return this
+    }
+}
+
+bruh.sup() // bruh {}
+
+
+var hello = function () {
+    console.log(this);
+    var helloInnerOne = function () {
+        console.log('helloInnerOne: ', this);
+        var helloInnerThree = function () {
+            console.log('helloInnerThree: ', this);
+        }
+        helloInnerThree();
+    }
+    helloInnerOne();
+}
+// hello();
+
+//
+
+
+var Foo = function (string) {
+    this.status = string;
+}
+
+Foo.prototype.getGreet = function () {
+    return this.status;
+}
+
+var newFoo = new Foo('stup');
+
+// newFoo.getGreet();
+
+
+// -----------------------------------------------
+
+
+var add = function (a, b) {
+    if (typeof a !== 'number' || typeof b !== 'number') {
+        throw {
+            name: 'TypeError',
+            message: 'add needs numbers'
+        };
+    }
+    return a + b;
+}
+
+var try_it = function () {
+    try {
+        add("seven");
+    } catch (e) {
+        console.log(e.name + ': ' + e.message);
+    }
+}
+// try_it( );
+
+// Recursion ------------------------------------
+
+var traverseDOM = function (node, cb) {
+    cb( node );                    // execute callback on initial node
+    node = node.firstChild;        // get firstchild of node
+    while ( node ) {               // if there is a firstChild
+        traverseDOM(node, cb);        // traverse that node
+        node = node.nextSibling;   // assign node to the nextChild
+    }
+}
+
+var testNode = document.getElementById('test');
+
+traverseDOM(testNode, function (node) {
+    console.log(node);
+});
+
+// Recursion
+// https://www.sitepoint.com/recursion-functional-javascript/ 
+
+// factor(3) //
+
+
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+</script>
+</html>
